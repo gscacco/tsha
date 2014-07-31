@@ -8,5 +8,36 @@
     <artifactId>tsha</artifactId>
     <version>0.1</version>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>gov.nasa</groupId>
+            <artifactId>wwj</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>gov.nasa</groupId>
+            <artifactId>wwjx</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>gov.nasa</groupId>
+            <artifactId>jogl</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>gov.nasa</groupId>
+            <artifactId>vpf-symbols</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>gov.nasa</groupId>
+            <artifactId>gdal</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>gov.nasa</groupId>
+            <artifactId>gluegen</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+    </dependencies>
 </project>
