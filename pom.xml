@@ -11,33 +11,29 @@
     <dependencies>
         <dependency>
             <groupId>gov.nasa</groupId>
-            <artifactId>wwj</artifactId>
-            <version>1.5.1</version>
+            <artifactId>worldwind</artifactId>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
-            <groupId>gov.nasa</groupId>
-            <artifactId>wwjx</artifactId>
-            <version>1.5.1</version>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-all-main</artifactId>
+            <version>2.1.5</version>
         </dependency>
         <dependency>
-            <groupId>gov.nasa</groupId>
-            <artifactId>jogl</artifactId>
-            <version>1.5.1</version>
+            <groupId>org.jogamp.gluegen</groupId>
+            <artifactId>gluegen-rt-main</artifactId>
+            <version>2.1.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.loadui</groupId>
+            <artifactId>testFx</artifactId>
+            <version>3.1.2</version>
         </dependency>
         <dependency>
-            <groupId>gov.nasa</groupId>
-            <artifactId>vpf-symbols</artifactId>
-            <version>1.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>gov.nasa</groupId>
-            <artifactId>gdal</artifactId>
-            <version>1.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>gov.nasa</groupId>
-            <artifactId>gluegen</artifactId>
-            <version>1.5.1</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.8</version>
         </dependency>
     </dependencies>
 </project>
