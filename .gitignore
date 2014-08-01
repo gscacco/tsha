@@ -10,3 +10,4 @@ target/*
 *.log.*
 *.lck.*
 *.orig
+*.png
