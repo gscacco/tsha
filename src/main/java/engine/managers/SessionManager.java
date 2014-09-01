@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package engine;
+package engine.managers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

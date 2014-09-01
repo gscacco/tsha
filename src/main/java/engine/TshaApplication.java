@@ -6,13 +6,10 @@
 
 package engine;
 
-import java.net.URL;
-import java.nio.file.Paths;
+import engine.managers.SessionManager;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -22,21 +19,11 @@ import javafx.stage.Stage;
  */
 public class TshaApplication extends Application {
 Stage primaryStage;
-    /*
-     ublic void start(Stage stage) throws Exception {
-     java.nio.file.Path path = Paths.get("");
-     System.out.println(path.toAbsolutePath().toString());
-     FXMLLoader loader = new FXMLLoader(new URL("file:/" + path + "/src/"));
-     loader.setRoot(new AnchorPane());
-     loader.load();        
-     Scene scene = new Scene(loader.getRoot());
-     stage.setScene(scene);
-     stage.show();
-     */
+
     @Override
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(new Group()));
-        stage.setFullScreen(true);
+//        stage.setFullScreen(true);
         stage.show();
         
         SessionManager sessionManager = new SessionManager(stage);

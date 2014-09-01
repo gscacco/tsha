@@ -1,19 +1,14 @@
 package mvc.controllers;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -46,16 +41,26 @@ public class TshaTextFieldControl extends AnchorPane {
             Logger.getLogger(TshaPasswordFieldControl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void setLabelText (String str) {
+
+    public void setLabelText(String str) {
         AnchorPane pane = (AnchorPane) getChildren().get(0);
         for (Node item : pane.getChildren()) {
             if (item.getId().equals("label")) {
-                ((Label)item).setText(str);
+                ((Label) item).setText(str);
                 break;
             }
         }
     }
 
+    public TextField getTextField() {
+        AnchorPane pane = (AnchorPane) getChildren().get(0);
+        for (Node item : pane.getChildren()) {
+            if (item.getId().equals("text")) {
+                return ((TextField) item);
+
+            }
+        }
+        return null;
+    }
 
 }

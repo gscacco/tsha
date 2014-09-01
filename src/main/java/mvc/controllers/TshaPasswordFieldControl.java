@@ -47,16 +47,28 @@ public class TshaPasswordFieldControl extends AnchorPane {
             Logger.getLogger(TshaPasswordFieldControl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void setLabelText (String str) {
+
+    public void setLabelText(String str) {
         AnchorPane pane = (AnchorPane) getChildren().get(0);
         for (Node item : pane.getChildren()) {
             if (item.getId().equals("label")) {
-                ((Label)item).setText(str);
+                ((Label) item).setText(str);
                 break;
             }
         }
     }
 
+    
+    public PasswordField getPasswordField(){
+          AnchorPane pane = (AnchorPane) getChildren().get(0);
+        for (Node item : pane.getChildren()) {
+            if (item.getId().equals("password")) {
+               return ((PasswordField) item);
+            
+            }
+        }
+        return null;
+    }
+  
 
 }

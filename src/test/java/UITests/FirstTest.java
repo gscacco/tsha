@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package UITests;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
