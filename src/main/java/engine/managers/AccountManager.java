@@ -12,14 +12,14 @@ import exceptions.DataNotFoundException;
  *
  * @author mpanagrosso
  */
-public class DBManager {
+public class AccountManager {
 
-    private static DBManager instance = null;
+    private static AccountManager instance = null;
 
-    public static DBManager getInstance() {
+    public static AccountManager getInstance() {
 
         if (instance == null) {
-            instance = new DBManager();
+            instance = new AccountManager();
         }
         return instance;
     }
@@ -29,7 +29,7 @@ public class DBManager {
 
         if (userName.equals("UtenteTest") && pwd.equals("Pa$$wordTest")) {
 
-            User user = new User();
+            User user = new User("pippo", "pluto", "paperino");
             user.setUserName(userName);
             user.setPassWord(pwd);
             user.setFullName("Marco Bianchi");

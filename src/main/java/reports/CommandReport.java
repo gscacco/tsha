@@ -6,28 +6,36 @@
 package reports;
 
 import engine.TshaEventBus;
+import java.io.Serializable;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  *
  * @author mpanagrosso
  */
-public class CommandReport {
+public class CommandReport implements Serializable {
 
-    Stage stage;
+    Window window;
     String message;
+    int commandResult;
 
-    public CommandReport(Stage stage, String message) {
-        this.stage = stage;
+    public CommandReport(Window window, String message, int commandResult) {
+        this.window = window;
         this.message = message;
+        this.commandResult = commandResult;
     }
 
-    public Stage getStage() {
-        return stage;
+    public Window getWindow() {
+        return window;
     }
 
     public String getMessage() {
         return message;
     }
 
+    
+    public int getCommandResult() {
+        return commandResult;
+    }
 }

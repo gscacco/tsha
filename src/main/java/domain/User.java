@@ -9,6 +9,11 @@ public class User {
     String passWord = "";
     String fullName = "";
 
+    public User(String name, String password, String fullname) {
+        userName = name;
+        passWord = password;
+        fullName = fullname;
+    }
 
     public String getUserName() {
         return userName;

@@ -21,6 +21,6 @@ public class TestSuiteLoginController {
 // The suite() method is helpful when using JUnit 3 Test Runners or Ant.
 
     public static junit.framework.Test suite() {
-        return new JUnit4TestAdapter(TestSuiteLoginController.class);
+        return new JUnit4TestAdapter(ReportsManagerEventHandlingTest.class);
     }
 }

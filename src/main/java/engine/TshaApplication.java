@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package engine;
 
 import engine.managers.SessionManager;
@@ -18,23 +17,33 @@ import javafx.stage.Stage;
  *
  */
 public class TshaApplication extends Application {
-Stage primaryStage;
+
+    private static Stage primaryStage;
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(new Group()));
-//        stage.setFullScreen(true);
-        stage.show();
-        
-        SessionManager sessionManager = new SessionManager(stage);
-        sessionManager.manageUserLogin();
+        System.out.println("Start from TshaApplication ");
+
         primaryStage = stage;
+        primaryStage.setScene(new Scene(new Group()));
+//        stage.setFullScreen(true);
+        primaryStage.show();
+        
+        SessionManager sessionManager = new SessionManager(primaryStage);
+        System.out.println("from tshaapp " + sessionManager );
+
+        sessionManager.manageUserLogin();
+        
+
+        ObjectCreator.getInstance().createObjects();
     }
 
-    
-    
-   public Stage getPrimaryStage(){
-    return this.primaryStage;}
+
+
+    public static Stage getStage() {
+        return primaryStage;
+    }
+
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
@@ -45,6 +54,7 @@ Stage primaryStage;
      */
     public static void main(String[] args) {
         launch(args);
+
     }
-    
+
 }

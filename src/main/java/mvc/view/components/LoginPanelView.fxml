@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import mvc.controllers.*?>
 
-<fx:root fx:id="root" id="AnchorPane" prefHeight="400.0" prefWidth="400.0" styleClass="mainFxmlClass" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvc.controllers.LoginPanelViewController">
+<fx:root fx:id="root" id="AnchorPane" prefHeight="400.0" prefWidth="400.0" styleClass="mainFxmlClass" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvc.model.LoginPanelModel">
    <children>
       <TshaTextFieldControl fx:id="userName" layoutX="14.0" layoutY="63.0" />
       <TshaPasswordFieldControl fx:id="passWord" layoutX="14.0" layoutY="113.0" />
