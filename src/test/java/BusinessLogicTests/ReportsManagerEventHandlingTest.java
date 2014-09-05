@@ -70,7 +70,7 @@ import org.loadui.testfx.utils.FXTestUtils;
             };
             
 
-            String str = "Pippo";
+            String str = "Pippu";
             String str2 = "Password2";
             controller2.type(str);
             controller2.press(KeyCode.TAB);
@@ -78,16 +78,16 @@ import org.loadui.testfx.utils.FXTestUtils;
             controller2.click("Login");
             Assert.assertNotNull(controller2.find(LoginPanelController.INVALID_CREDENTIALS));
             Thread.sleep(2000);
-            
             String str3 = "Password1";
+            String str4 = "Pippo";
             Scene scene =  LoginPanelController.getInstance().getStage().getScene();
             Node node = scene.lookup("#userName");
             controller2.doubleClick(node);
             controller.eraseCharacters(str.length());
-            controller2.type(str);
+            controller2.type(str4);
             node = scene.lookup("#passWord");
             controller2.click(node);
-            controller.eraseCharacters(str2.length());
+//          controller.eraseCharacters(str2.length());
 
             controller2.type(str3);
             controller2.click("Login");

@@ -7,7 +7,7 @@ package mvc.controllers;
 
 import domain.User;
 import engine.TshaEventBus;
-import event.data.ExchangeData;
+import event.data.IExchangeData;
 import event.data.KeyTypedData;
 import event.data.LoginData;
 import event.data.ShutDownData;
@@ -37,10 +37,10 @@ import reports.CommandReport;
  *
  * @author mpanagrosso
  */
-public class LoginPanelController extends BaseController implements ChangeListener<ExchangeData> {
+public class LoginPanelController extends BaseController{
 
     private static LoginPanelController instance = null;
- 
+
     FXMLLoader loader = null;
     LoginPanelModel model;
     public static String INVALID_CREDENTIALS = "Invalid Credentials";
@@ -82,17 +82,31 @@ public class LoginPanelController extends BaseController implements ChangeListen
     }
 
     @Override
-    public void changed(ObservableValue<? extends ExchangeData> ov, ExchangeData t, ExchangeData t1) {
+    public void hideView() {
+//    stage.getScene().getWindow().hide();
+        stage.hide();
+    }
+
+    @Override
+    public void initialize() {
+        model.setUserName("");
+        model.setPassword("");
+    }
+
+    @Override
+    public void changed(ObservableValue<? extends IExchangeData> ov, IExchangeData t, IExchangeData t1) {
         if (ov.getValue() instanceof LoginData) {
             if (validate(((LoginData) ov.getValue()).getUserName(), ((LoginData) ov.getValue()).getPassWord())) {
-                stage.getScene().getWindow().hide();
+                hideView();
+                initialize();
             } else {
                 TshaEventBus.getInstance().post(new CommandReport(stage.getScene().getWindow(), INVALID_CREDENTIALS, 1));
 //                model.setUserName("");
-//                model.setPassword("");
+                model.setPassword("");
             }
         } else if (ov.getValue() instanceof ShutDownData) {
-            stage.getScene().getWindow().hide();
+            hideView();
+            initialize();
 
         } else if (ov.getValue() instanceof KeyTypedData && ((KeyTypedData) ov.getValue()).getCaller().equals("userField")) {
             if (checkUserNameValidity(((KeyTypedData) ov.getValue()).getKeyTyped())) {
@@ -102,14 +116,14 @@ public class LoginPanelController extends BaseController implements ChangeListen
                 System.out.println("INPUT ERROR");
             }
 
-        }   else if (ov.getValue() instanceof KeyTypedData && ((KeyTypedData) ov.getValue()).getCaller().equals("passwordField")) {
-               if (checkPassWordValidity(((KeyTypedData) ov.getValue()).getKeyTyped())) {
+        } else if (ov.getValue() instanceof KeyTypedData && ((KeyTypedData) ov.getValue()).getCaller().equals("passwordField")) {
+            if (checkPassWordValidity(((KeyTypedData) ov.getValue()).getKeyTyped())) {
 
                 System.out.println("PASSWORD OK");
             } else {
                 System.out.println("PASSWORD ERROR");
             }
-            }
+        }
 
     }
 
@@ -154,8 +168,5 @@ public class LoginPanelController extends BaseController implements ChangeListen
         } else {
             throw new DataNotFoundException();
         }
-
     }
-
-  
 }

@@ -10,6 +10,6 @@ package event.data;
  *
  * @author mpanagrosso
  */
-public interface ExchangeData {
+public interface IExchangeData {
     
 }

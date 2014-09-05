@@ -1,6 +1,6 @@
 package mvc.model;
 
-import event.data.ExchangeData;
+import event.data.IExchangeData;
 import event.data.KeyTypedData;
 import event.data.LoginData;
 import event.data.ShutDownData;
@@ -55,7 +55,7 @@ public class LoginPanelModel implements Initializable {
 
             @Override
             public void handle(ActionEvent event) {
-                SimpleObjectProperty<ExchangeData> exchangeData = new SimpleObjectProperty<>(new ShutDownData());
+                SimpleObjectProperty<IExchangeData> exchangeData = new SimpleObjectProperty<>(new ShutDownData());
                 exchangeData.addListener(LoginPanelController.getInstance());
                 exchangeData.set(new ShutDownData());
             }
@@ -63,7 +63,7 @@ public class LoginPanelModel implements Initializable {
 
         userName.getTextField().addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
             public void handle(KeyEvent event) {
-                SimpleObjectProperty<ExchangeData> exchangeData = new SimpleObjectProperty<>(new KeyTypedData());
+                SimpleObjectProperty<IExchangeData> exchangeData = new SimpleObjectProperty<>(new KeyTypedData());
                 exchangeData.addListener(LoginPanelController.getInstance());
                 exchangeData.set(new KeyTypedData(((TextField) event.getSource()).getText(), "userField"));
             }
@@ -72,7 +72,7 @@ public class LoginPanelModel implements Initializable {
         passWord.getPasswordField().addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
             public void handle(KeyEvent event) {
 
-                SimpleObjectProperty<ExchangeData> exchangeData = new SimpleObjectProperty<>(new KeyTypedData());
+                SimpleObjectProperty<IExchangeData> exchangeData = new SimpleObjectProperty<>(new KeyTypedData());
                 exchangeData.addListener(LoginPanelController.getInstance());
                 exchangeData.set(new KeyTypedData(((TextField) event.getSource()).getText(), "passwordField"));
             }

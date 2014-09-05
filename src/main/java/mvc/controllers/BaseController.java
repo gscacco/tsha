@@ -1,24 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package mvc.controllers;
 
+import event.data.IExchangeData;
+import javafx.beans.value.ChangeListener;
 import javafx.stage.Stage;
 
 /**
  *
  * @author mpanagrosso
  */
-public class BaseController {
+public abstract class BaseController  implements ChangeListener<IExchangeData> {
+
     protected static Stage stage;
-    public BaseController(){
+
+    public BaseController() {
         stage = new Stage();
-    
+
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
     
-      public static Stage getStage(){return stage;}
-    
+   abstract public void showView(Stage primaryStage);
+   abstract public void hideView();
+   abstract public void initialize();
+
 }

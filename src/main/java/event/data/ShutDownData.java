@@ -11,6 +11,6 @@ package event.data;
  *
  * @author mpanagrosso
  */
-public class ShutDownData implements ExchangeData {
+public class ShutDownData implements IExchangeData {
     
 }

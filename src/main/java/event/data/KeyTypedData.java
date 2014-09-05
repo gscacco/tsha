@@ -4,7 +4,7 @@ package event.data;
  *
  * @author mpanagrosso
  */
-public class KeyTypedData implements ExchangeData {
+public class KeyTypedData implements IExchangeData {
 
     String keysTyped;
     String caller;

@@ -10,7 +10,7 @@ package event.data;
  *
  * @author mpanagrosso
  */
-public class LoginData implements ExchangeData{
+public class LoginData implements IExchangeData{
     String userName;
     String passWord;
 

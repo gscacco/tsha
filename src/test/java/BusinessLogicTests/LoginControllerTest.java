@@ -35,7 +35,7 @@ public class LoginControllerTest {
                 return TshaApplication.getStage().getScene().getRoot();
             }
         };
-
+        controller.doubleClick();
     }
 
     @Test
@@ -46,7 +46,6 @@ public class LoginControllerTest {
                 return LoginPanelController.getInstance().getStage().getScene().getRoot();
             }
         };
-        controller.rightClick();
         Assert.assertTrue(LoginPanelController.getInstance().validate("Pippo", "Password1"));
 
     }
@@ -59,9 +58,25 @@ public class LoginControllerTest {
                 return LoginPanelController.getInstance().getStage().getScene().getRoot();
             }
         };
-        controller.rightClick();
         Assert.assertFalse(LoginPanelController.getInstance().validate("Pippo", "Password2"));
 
+    }
+
+    @Test
+    public void rightUserNameInput() {
+        Assert.assertFalse(LoginPanelController.getInstance().checkUserNameValidity("_testprimo"));
+        Assert.assertFalse(LoginPanelController.getInstance().checkUserNameValidity("_test"));
+        Assert.assertFalse(LoginPanelController.getInstance().checkUserNameValidity("5testprimo"));
+        Assert.assertTrue(LoginPanelController.getInstance().checkUserNameValidity("testprimo_5"));
+        Assert.assertTrue(LoginPanelController.getInstance().checkUserNameValidity("te_st_5_primo"));
+    }
+
+    @Test
+    public void rightPasswordInput() {
+        Assert.assertTrue(LoginPanelController.getInstance().checkPassWordValidity("this_is_pa$$"));
+        Assert.assertTrue(LoginPanelController.getInstance().checkPassWordValidity("Pa$$Word_&5"));
+        Assert.assertFalse(LoginPanelController.getInstance().checkPassWordValidity("Pa$$"));
+        Assert.assertTrue(LoginPanelController.getInstance().checkPassWordValidity("$0f1st1c4t3dpa$$"));
     }
 
     @AfterClass
@@ -71,13 +86,7 @@ public class LoginControllerTest {
             public void run() {
                 TshaApplication.getStage().close();
             }
-        });
-//        try {
-//            Runtime.getRuntime().exec("taskkill /F /IM external_program.exe");
-//        } catch (IOException ex) {
-//           Logger.getLogger(LoginPanelViewController.class.getName()).log(Level.SEVERE, null, ex);
-//
-//        }        
+        });    
     }
 
 }
