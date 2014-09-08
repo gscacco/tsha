@@ -6,9 +6,7 @@
 package BusinessLogicTests;
 
 import engine.TshaApplication;
-import event.data.LoginData;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Parent;
 import mvc.controllers.LoginPanelController;
 import org.junit.*;
@@ -46,7 +44,7 @@ public class LoginControllerTest {
                 return LoginPanelController.getInstance().getStage().getScene().getRoot();
             }
         };
-        Assert.assertTrue(LoginPanelController.getInstance().validate("Pippo", "Password1"));
+        Assert.assertTrue(LoginPanelController.getInstance().validate("Utente1", "Password1"));
 
     }
 
@@ -62,22 +60,8 @@ public class LoginControllerTest {
 
     }
 
-    @Test
-    public void rightUserNameInput() {
-        Assert.assertFalse(LoginPanelController.getInstance().checkUserNameValidity("_testprimo"));
-        Assert.assertFalse(LoginPanelController.getInstance().checkUserNameValidity("_test"));
-        Assert.assertFalse(LoginPanelController.getInstance().checkUserNameValidity("5testprimo"));
-        Assert.assertTrue(LoginPanelController.getInstance().checkUserNameValidity("testprimo_5"));
-        Assert.assertTrue(LoginPanelController.getInstance().checkUserNameValidity("te_st_5_primo"));
-    }
+   
 
-    @Test
-    public void rightPasswordInput() {
-        Assert.assertTrue(LoginPanelController.getInstance().checkPassWordValidity("this_is_pa$$"));
-        Assert.assertTrue(LoginPanelController.getInstance().checkPassWordValidity("Pa$$Word_&5"));
-        Assert.assertFalse(LoginPanelController.getInstance().checkPassWordValidity("Pa$$"));
-        Assert.assertTrue(LoginPanelController.getInstance().checkPassWordValidity("$0f1st1c4t3dpa$$"));
-    }
 
     @AfterClass
     public static void shutdownAll() {

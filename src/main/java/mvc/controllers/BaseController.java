@@ -1,14 +1,12 @@
 package mvc.controllers;
 
-import event.data.IExchangeData;
-import javafx.beans.value.ChangeListener;
 import javafx.stage.Stage;
 
 /**
  *
  * @author mpanagrosso
  */
-public abstract class BaseController  implements ChangeListener<IExchangeData> {
+public abstract class BaseController {
 
     protected static Stage stage;
 

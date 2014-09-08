@@ -4,13 +4,17 @@
  * and open the template in the editor.
  */
 
-package event.data;
+package mvc.controllers.interfaces;
 
+import reports.CommandReport;
 
 /**
  *
  * @author mpanagrosso
  */
-public class ShutDownData implements IExchangeData {
-    
+public interface IActionButton {
+    public CommandReport ok();
+    public void cancel();
+    public CommandReport apply();
+    public void close();
 }

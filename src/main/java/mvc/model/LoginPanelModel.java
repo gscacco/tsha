@@ -1,26 +1,19 @@
 package mvc.model;
 
-import event.data.IExchangeData;
-import event.data.KeyTypedData;
-import event.data.LoginData;
-import event.data.ShutDownData;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import mvc.controllers.LoginPanelController;
 import mvc.controllers.TshaPasswordFieldControl;
 import mvc.controllers.TshaTextFieldControl;
 
 /**
- * FXML Controller class
  *
  * @author Mirko
  */
@@ -40,14 +33,11 @@ public class LoginPanelModel implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         login.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                SimpleObjectProperty<LoginData> exchangeData = new SimpleObjectProperty<>(new LoginData());
-                exchangeData.addListener(LoginPanelController.getInstance());
-                exchangeData.set(new LoginData(userName.getTextField().getText(), passWord.getPasswordField().getText()));
+                LoginPanelController.getInstance().login();
             }
         });
 
@@ -55,28 +45,32 @@ public class LoginPanelModel implements Initializable {
 
             @Override
             public void handle(ActionEvent event) {
-                SimpleObjectProperty<IExchangeData> exchangeData = new SimpleObjectProperty<>(new ShutDownData());
-                exchangeData.addListener(LoginPanelController.getInstance());
-                exchangeData.set(new ShutDownData());
+                LoginPanelController.getInstance().shutDown();
             }
         });
 
         userName.getTextField().addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
             public void handle(KeyEvent event) {
-                SimpleObjectProperty<IExchangeData> exchangeData = new SimpleObjectProperty<>(new KeyTypedData());
-                exchangeData.addListener(LoginPanelController.getInstance());
-                exchangeData.set(new KeyTypedData(((TextField) event.getSource()).getText(), "userField"));
+                if (checkUserNameValidity(userName.getTextField().getText())) {
+
+                    System.out.println("INPUT OK");
+                } else {
+                    System.out.println("INPUT ERROR");
+                }
             }
         });
-
-        passWord.getPasswordField().addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+        
+             passWord.getPasswordField().addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
             public void handle(KeyEvent event) {
+                if (checkPassWordValidity(passWord.getPasswordField().getText())) {
 
-                SimpleObjectProperty<IExchangeData> exchangeData = new SimpleObjectProperty<>(new KeyTypedData());
-                exchangeData.addListener(LoginPanelController.getInstance());
-                exchangeData.set(new KeyTypedData(((TextField) event.getSource()).getText(), "passwordField"));
+                    System.out.println("INPUT OK");
+                } else {
+                    System.out.println("INPUT ERROR");
+                }
             }
         });
+
 
     }
 
@@ -95,4 +89,23 @@ public class LoginPanelModel implements Initializable {
     public void setPassword(String value) {
         passWord.getPasswordField().setText(value);
     }
+
+    public String getUserName() {
+        return userName.getTextField().getText();
+    }
+
+    public String getPassword() {
+        return passWord.getPasswordField().getText();
+    }
+
+    public boolean checkUserNameValidity(String input) {
+
+        return input.matches("^[A-Za-z](?:_?[A-Za-z0-9])*$") && input.length() > 4 && input.length() < 14;
+    }
+
+    public boolean checkPassWordValidity(String input) {
+
+        return input.matches("[A-Za-z0-9_\\$\\&]*$") && input.length() >= 8 && input.length() <= 16;
+    }
+
 }

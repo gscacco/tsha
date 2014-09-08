@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 
-package event.data;
+package mvc.controllers.interfaces;
 
 /**
  *
  * @author mpanagrosso
  */
-public interface IExchangeData {
-    
+public interface ILoginController {
+    public void login();
+    public void shutDown();
 }

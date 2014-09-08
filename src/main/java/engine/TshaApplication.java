@@ -28,14 +28,14 @@ public class TshaApplication extends Application {
         primaryStage.setScene(new Scene(new Group()));
 //        stage.setFullScreen(true);
         primaryStage.show();
-        
+         ObjectCreator.getInstance().createObjects();
         SessionManager sessionManager = new SessionManager(primaryStage);
         System.out.println("from tshaapp " + sessionManager );
 
         sessionManager.manageUserLogin();
         
 
-        ObjectCreator.getInstance().createObjects();
+       
     }
 
 
