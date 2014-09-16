@@ -6,12 +6,18 @@
 package BusinessLogicTests;
 
 import engine.TshaApplication;
+import engine.TshaEventBus;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.Parent;
+import javafx.scene.input.KeyCode;
+import mockApplication.EventReceiver;
 import mvc.controllers.LoginPanelController;
 import org.junit.*;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
+import reports.SessionEvent;
 
 /**
  *
@@ -37,7 +43,7 @@ public class LoginControllerTest {
     }
 
     @Test
-    public void ShouldLogUser() {
+    public void shouldLogUser() {
         controller = new GuiTest() {
             @Override
             protected Parent getRootNode() {
@@ -49,7 +55,7 @@ public class LoginControllerTest {
     }
 
     @Test
-    public void ShouldNotLogUser() {
+    public void shouldNotLogUser() {
         controller = new GuiTest() {
             @Override
             protected Parent getRootNode() {
@@ -60,8 +66,23 @@ public class LoginControllerTest {
 
     }
 
-   
+    @Test
+    public void shouldPostCommand() {
+          EventReceiver receiver = new EventReceiver(TshaEventBus.getInstance());
+        controller = new GuiTest() {
+            @Override
+            protected Parent getRootNode() {
+                return LoginPanelController.getInstance().getStage().getScene().getRoot();
+            }
+        };
 
+        controller.type("Utente1");
+        controller.press(KeyCode.TAB);
+        controller.type("Password1");
+        controller.click("Login");
+        Assert.assertEquals(SessionEvent.SESSION_ENTERED, receiver.sessionEventReport);
+
+    }
 
     @AfterClass
     public static void shutdownAll() {
@@ -70,7 +91,7 @@ public class LoginControllerTest {
             public void run() {
                 TshaApplication.getStage().close();
             }
-        });    
+        });
     }
 
 }

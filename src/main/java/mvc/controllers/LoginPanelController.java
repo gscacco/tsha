@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import mvc.controllers.interfaces.ILoginController;
 import mvc.model.LoginPanelModel;
 import reports.CommandReport;
+import reports.SessionEvent;
 
 /**
  *
@@ -31,18 +32,14 @@ public class LoginPanelController extends BaseController implements ILoginContro
 
     private static LoginPanelController instance = null;
 
-    FXMLLoader loader = null;
-    LoginPanelModel model;
+//   private FXMLLoader loader = null;
+   private LoginPanelModel model;
     public static String INVALID_CREDENTIALS = "Invalid Credentials";
-
+    public static String INVALID_INPUT = "Invalid Input";
     private LoginPanelController() throws MalformedURLException, IOException {
         stage = new Stage();
-        java.nio.file.Path path = Paths.get("");
-        System.out.println("file:/" + path.toAbsolutePath().toString() + "\\src\\main\\java\\mvc\\view\\components\\LoginPanelView.fxml");
-        loader = new FXMLLoader(new URL("file:/" + path.toAbsolutePath().toString() + "\\src\\main\\java\\mvc\\view\\components\\LoginPanelView.fxml"));
-        loader.setRoot(new AnchorPane());
-        loader.load();
-        model = loader.getController();
+        model = new LoginPanelModel();
+//        model = loader.getController();
         model.setUserNameText("User Name");
         model.setPasswordText("Password");
 
@@ -61,25 +58,26 @@ public class LoginPanelController extends BaseController implements ILoginContro
     }
 
     @Override
-    public void login() {
+    public void manageLogin() {
         if (validate(model.getUserName(), model.getPassword())) {
             hideView();
             initialize();
+            TshaEventBus.getInstance().post(SessionEvent.SESSION_ENTERED);
         } else {
-            TshaEventBus.getInstance().post(new CommandReport(stage.getScene().getWindow(), INVALID_CREDENTIALS, 1));
+            TshaEventBus.getInstance().post(new CommandReport(stage.getScene().getWindow(), INVALID_CREDENTIALS, 0));
             model.setPassword("");
         }
     }
 
     @Override
-    public void shutDown() {
+    public void manageShutDown() {
         hideView();
         initialize();
 
     }
 
     public void showView(Stage primaryStage) {
-        Scene scene = new Scene(loader.getRoot());
+        Scene scene = new Scene(model.getRoot());
         stage.setScene(scene);
         stage.initOwner(primaryStage);
         stage.initModality(Modality.APPLICATION_MODAL);

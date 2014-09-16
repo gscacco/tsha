@@ -9,6 +9,10 @@ import engine.managers.SessionManager;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -22,23 +26,15 @@ public class TshaApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println("Start from TshaApplication ");
-
         primaryStage = stage;
-        primaryStage.setScene(new Scene(new Group()));
-//        stage.setFullScreen(true);
+        setUpMainWindow();
         primaryStage.show();
-         ObjectCreator.getInstance().createObjects();
-        SessionManager sessionManager = new SessionManager(primaryStage);
-        System.out.println("from tshaapp " + sessionManager );
+        ObjectCreator.getInstance().createObjects();
 
-        sessionManager.manageUserLogin();
-        
+        SessionManager.getInstance().manageUserLogin();
 
-       
+
     }
-
-
 
     public static Stage getStage() {
         return primaryStage;
@@ -54,6 +50,14 @@ public class TshaApplication extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+
+    }
+
+    private void setUpMainWindow() {
+
+        Group root = new Group();
+        primaryStage.setScene(new Scene(root,Color.BLACK));
+//         primaryStage.setFullScreen(true);
 
     }
 

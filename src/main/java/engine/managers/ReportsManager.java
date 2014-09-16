@@ -7,13 +7,9 @@ package engine.managers;
 
 import com.google.common.eventbus.Subscribe;
 import engine.TshaEventBus;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.control.PopupControl;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
 import reports.CommandReport;
 
 /**
@@ -23,6 +19,10 @@ import reports.CommandReport;
 public class ReportsManager {
 
     private static ReportsManager instance = null;
+    public final static int PROCESSED = 0;
+    public final static int NULLVIEW = 1;
+    public final static int NULLMESSAGE = 2;
+    public final static int COMMANDNOTVALID = 3;
 
     public static ReportsManager getInstance() {
 
@@ -35,19 +35,33 @@ public class ReportsManager {
     }
 
     @Subscribe
-    public boolean handleCommandReport(CommandReport event) {
-        if (event.getCommandResult() > 0) {
+    public int handleCommandReport(final CommandReport event) {
+        if (event.getWindow() == null) {
+            return NULLVIEW;
+        }
+        if (event.getMessage() == null) {
+            return NULLMESSAGE;
+        }
+        if (event.getCommandResult() != 0) {
+            return COMMANDNOTVALID;
+        }
+       
+        Platform.runLater(new Runnable() {
+
+            @Override
+            public void run() {
             final PopupControl popup = new PopupControl();
             popup.setAutoFix(false);
             popup.setHideOnEscape(true);
             popup.getScene().setRoot(new Label(event.getMessage()));
             popup.setId("popup");
             popup.show(event.getWindow());
-            popup.setAutoHide(true);
-            return false;
-        } else {
-            return true;
-        }
+            popup.setAutoHide(true); 
+            }
+        });
+      
+            return PROCESSED;
+        
 
     }
 }

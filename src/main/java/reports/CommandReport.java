@@ -5,9 +5,7 @@
  */
 package reports;
 
-import engine.TshaEventBus;
 import java.io.Serializable;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 /**

@@ -11,6 +11,6 @@ package mvc.controllers.interfaces;
  * @author mpanagrosso
  */
 public interface ILoginController {
-    public void login();
-    public void shutDown();
+    public void manageLogin();
+    public void manageShutDown();
 }

@@ -19,6 +19,7 @@ public abstract class BaseController {
         return stage;
     }
     
+    // TODO:centralizzare la setAlwaysOnTop 
    abstract public void showView(Stage primaryStage);
    abstract public void hideView();
    abstract public void initialize();

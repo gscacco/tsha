@@ -7,6 +7,7 @@ package engine;
 
 import engine.managers.AccountManager;
 import engine.managers.ReportsManager;
+import engine.managers.SessionManager;
 import javafx.stage.Stage;
 
 /**
@@ -31,5 +32,6 @@ public class ObjectCreator {
         ReportsManager.getInstance();
         TshaEventBus.getInstance();
         AccountManager.getInstance();
+        SessionManager.getInstance();
     }
 }
