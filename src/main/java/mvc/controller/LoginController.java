@@ -1,81 +1,146 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mvc.controller;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.Parent;
+import javafx.animation.Animation;
+import javafx.animation.Transition;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import mvc.model.LoginModel;
+import javafx.util.Duration;
+import managers.AccountManager;
+import managers.interfaces.IAccountManager;
 
 /**
  *
- * @author mpanagrosso
+ * @author Mirko
  */
-public class LoginController {
+public class LoginController extends AnchorPane {
 
-    private static LoginController instance = null;
-    private static Stage stage;
+    private Stage stage;
+    private static String INVALID_CREDENTIALS = "Invalid credentials";
+    private TranslateTransition moveErrorPanel;
 
-    public void hideView() {
-        stage.hide();
-    }
-    private LoginModel model;
+    @FXML
+    private Button login;
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private AnchorPane errorPanel;
+    @FXML
+    private Label errorLabel;
 
-    private LoginController() {
+    private IAccountManager accountManager;
+
+    public LoginController(IAccountManager accountManager) {
         stage = new Stage();
-        model = new LoginModel();
+        this.accountManager = accountManager;
+
+        java.nio.file.Path path = Paths.get("");
+        FXMLLoader loader;
+        try {
+            loader = new FXMLLoader(new URL("file:/" + path.toAbsolutePath().toString() + "\\src\\main\\java\\mvc\\view\\LoginPanel.fxml"));
+            loader.setRoot(this);
+            loader.setController(this);
+            loader.load();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         setUpLoginStage();
 
     }
 
     private void setUpLoginStage() {
-        Scene scene = new Scene(model);
+        Scene scene = new Scene(this);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.centerOnScreen();
+
+        moveErrorPanel = new TranslateTransition(Duration.seconds(0.5), errorPanel);
+        login.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                manageLogin();
+            }
+        });
+
+        passwordField.setOnKeyTyped(new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent event) {
+                if (moveErrorPanel.getToY() == 80) {
+                    moveErrorPanel.setFromY(80);
+                    moveErrorPanel.setToY(-60);
+                    moveErrorPanel.play();
+                }
+            }
+        });
+        usernameField.setOnKeyTyped(new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent event) {
+                if (moveErrorPanel.getToY() == 80) {
+                    moveErrorPanel.setFromY(80);
+                    moveErrorPanel.setToY(-60);
+                    moveErrorPanel.play();
+                }
+
+            }
+        });
+
     }
 
-    public static LoginController getInstance() {
-
-        if (instance == null) {
-
-            instance = new LoginController();
-
-        }
-        return instance;
+    public void hideView() {
+        this.setVisible(false);
+        stage.hide();
     }
 
     public void showView(Stage primaryStage) {
-
         stage.initOwner(primaryStage);
-
         stage.show();
 
     }
 
-    public static Stage getStage() {
-        return stage;
-    }
-
-    public Parent getModel() {
-        return model;
-    }
-
     public void manageLogin() {
-        if (model.getUsernameField().getText().equals("Utente1")
-                && model.getPasswordField().getText().equals("Password1")) {
+
+        if (accountManager.checkUserValidity(usernameField.getText(), passwordField.getText())) {
             hideView();
+        } else {
+            errorLabel.setText(INVALID_CREDENTIALS);
+            moveErrorPanel.setFromY(-60);
+            moveErrorPanel.setToY(80);
+
+            moveErrorPanel.play();
         }
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 
 }

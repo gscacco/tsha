@@ -2,11 +2,16 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
+.baseStyle {
 
 }
 
-.red{
-    color:red;
+
+
+
+.errorPanel{
+    -fx-border-color: red;
+  -fx-border-width: 2;
+    
     
 }

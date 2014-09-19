@@ -3,40 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package engine;
+package utility;
 
+import unita.*;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.stage.Stage;
-import managers.AccountManager;
+import managers.interfaces.IAccountManager;
 import mvc.controller.LoginController;
 
 /**
  *
  * @author mpanagrosso
  */
-public class TshaApplication extends Application {
+public class MockAppLoginController extends MockApp {
 
-    private static Stage primaryStage;
+    static FakeAccountManager accountManager;
+    protected static Stage primaryStage;
+    boolean accountManagerResult = false;
 
     @Override
-    public void start(Stage stage) throws Exception {
-        primaryStage = stage;
-
-        primaryStage.show();
-        AccountManager accountManager = new AccountManager();
+    public void startSpecifiedComponents() {
+        accountManager = new FakeAccountManager();
+        accountManager.setValidationResult(accountManagerResult);
         LoginController controller = new LoginController(accountManager);
         controller.showView(primaryStage);
-
     }
 
-    public static Stage getStage() {
-        return primaryStage;
+    public static FakeAccountManager getAccountManager() {
+        return accountManager;
     }
 
     public static void main(String[] args) {
         launch(args);
 
     }
-
 }

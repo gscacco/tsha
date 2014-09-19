@@ -5,6 +5,7 @@
  */
 package unita;
 
+import utility.MockApp;
 import engine.TshaApplication;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,28 +45,30 @@ public class LoginViewTest {
         controller.doubleClick();
     }
 
-    @Test
-    public void shouldContainTextFieldAndButtons() {
-        Platform.runLater(new Runnable() {
-
-            @Override
-            public void run() {
-                LoginController.getInstance().showView(MockApp.getStage());
-                controller = new GuiTest() {
-                    @Override
-                    protected Parent getRootNode() {
-                        return LoginController.getInstance().getModel();
-                    }
-                };
-                
-            
-            }
-        });
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(LoginViewTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    @Test
+//    public void shouldShowNotificationOnError() {
+//        Platform.runLater(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                LoginController.getInstance().showView(MockApp.getStage());
+//                controller = new GuiTest() {
+//                    @Override
+//                    protected Parent getRootNode() {
+//                        return LoginController.getInstance().getModel();
+//                    }
+//                };
+//                
+//            controller.click("#usernameField").type("wrong name");
+//            controller.click("#passwordField").type("wrong ");
+//                
+//            }
+//        });
+//        try {
+//            Thread.sleep(500);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(LoginViewTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
 }
