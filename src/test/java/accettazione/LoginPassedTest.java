@@ -6,6 +6,8 @@
 package accettazione;
 
 import engine.TshaApplication;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -77,9 +79,15 @@ public class LoginPassedTest {
         controller.click(userNameField).type("Utente1");
         controller.click(passwordField).type("Password1");
         controller.click(loginButton);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(LoginPassedTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //verify
-
-//        Assert.assertTrue(Canvas must be visible);
+        Assert.assertTrue(TshaApplication.getFrame().isVisible());
+        Assert.assertNotNull(controller.find("#mainBar"));
+        Assert.assertTrue(TshaApplication.getStage().getOpacity() == 0);
 
     }
 

@@ -5,11 +5,20 @@
  */
 package engine;
 
+import mvc.controller.StartUpGuiController;
+import managers.CommmunicationManager;
+import constants.IPropertyReader;
+import constants.PropertiesReader;
+import java.awt.Dimension;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
+import javax.swing.JFrame;
 import managers.AccountManager;
+import managers.SessionManager;
 import mvc.controller.LoginController;
+import mvc.controller.TshaMainBarController;
+import mvc.controller.interfaces.IService;
 
 /**
  *
@@ -18,6 +27,12 @@ import mvc.controller.LoginController;
 public class TshaApplication extends Application {
 
     private static Stage primaryStage;
+    private static JFrame frame;
+
+    public static JFrame getFrame() {
+        return frame;
+    }
+    private SessionManager sessionManager;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -25,8 +40,16 @@ public class TshaApplication extends Application {
 
         primaryStage.show();
         AccountManager accountManager = new AccountManager();
-        LoginController controller = new LoginController(accountManager);
-        controller.showView(primaryStage);
+        CommmunicationManager communicationManager = new CommmunicationManager();
+        IPropertyReader propertiesReader = new PropertiesReader();
+        frame = new JFrame();
+        TshaMainBarController mainBar = new TshaMainBarController(new Stage(), propertiesReader);
+        IService startUpGuiController = new StartUpGuiController(primaryStage, frame, mainBar,
+                new Dimension(Integer.parseInt(propertiesReader.readProperty("width")),
+                        Integer.parseInt(propertiesReader.readProperty("height"))));
+
+        IService loginController = new LoginController(accountManager, communicationManager, new Stage(), propertiesReader);
+        sessionManager = new SessionManager(primaryStage, communicationManager, startUpGuiController, loginController);
 
     }
 

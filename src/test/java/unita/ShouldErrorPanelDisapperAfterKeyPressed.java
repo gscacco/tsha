@@ -35,6 +35,7 @@ public class ShouldErrorPanelDisapperAfterKeyPressed {
     private static Node userNameField;
     private static Node passwordField;
     private static Node errorLabel;
+    private static Node errorPanel;
 
     static GuiTest controller;
 
@@ -58,6 +59,7 @@ public class ShouldErrorPanelDisapperAfterKeyPressed {
         userNameField = loginPanel.lookup("#usernameField");
         passwordField = loginPanel.lookup("#passwordField");
         errorLabel = loginPanel.lookup("#errorLabel");
+        errorPanel = loginPanel.lookup("#errorPanel");
     }
 
     @Test
@@ -72,24 +74,25 @@ public class ShouldErrorPanelDisapperAfterKeyPressed {
         controller.click(passwordField).type(UniqueGenerator.getString());
         controller.click(loginButton);
                 try {
-            Thread.sleep(2000);
+            Thread.sleep(500);
         } catch (InterruptedException ex) {
             Logger.getLogger(ShouldNotLoginTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+     
 
         controller.click(userNameField).type("23");
      
 
         //lo sleep serve perchè l'assert deve essere eseguito dopo che la transizione è completata
         try {
-            Thread.sleep(2000);
+            Thread.sleep(500);
         } catch (InterruptedException ex) {
             Logger.getLogger(ShouldNotLoginTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     
         //verify
-        Assert.assertFalse(controller.exists("Invalid credentials"));
+        Assert.assertEquals(errorPanel.getTranslateY(),-60.0, 0);
     }
 
     @AfterClass

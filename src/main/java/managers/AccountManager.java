@@ -23,8 +23,8 @@ public class AccountManager implements IAccountManager {
                 && password.equals("Password2")) {
             return true;
         }
-        if (userName.equals("Utente3")
-                && password.equals("Password3")) {
+        if (userName.equals("1")
+                && password.equals("1")) {
             return true;
         }
         return false;

@@ -5,6 +5,7 @@
  */
 package utility;
 
+import constants.PropertiesReader;
 import unita.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -25,8 +26,8 @@ public class MockAppLoginController extends MockApp {
     public void startSpecifiedComponents() {
         accountManager = new FakeAccountManager();
         accountManager.setValidationResult(accountManagerResult);
-        LoginController controller = new LoginController(accountManager);
-        controller.showView(primaryStage);
+        LoginController controller = new LoginController(accountManager,new FakeCommunicationManager(), new Stage(), new PropertiesReader());
+        controller.execute(primaryStage);
     }
 
     public static FakeAccountManager getAccountManager() {
