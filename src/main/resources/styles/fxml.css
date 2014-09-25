@@ -2,11 +2,75 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
+/*Caspian ovrriding*/
+
+.root{
+
 
 }
 
-.red{
-    color:red;
-    
+
+/*Panels layout*/
+
+
+/*#################### LOGIN PANEL ###################*/
+.loginPanel{
+    -fx-border-width: 2;
+    -fx-border-color: silver;
+
+
+
+}
+
+.loginPanel .label, .button{
+
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian ,lightgrey , 0,0,0,1 );
+}
+.loginPanel  .button{
+    -fx-effect:null;
+}
+
+.loginPanel .login{
+    -fx-background-color: linear-gradient(#64d5de, #1cd5ed);
+    -fx-text-fill:white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+
+}
+
+
+
+/*#################### ERROR PANEL ###################*/
+.errorPanel{
+    -fx-border-color: red;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+    -fx-background-image: url("../images/error.png");
+    -fx-background-size: 35 35;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:10; 
+    -fx-background-color: #cfe3b4;
+}
+.errorPanel .label{
+    -fx-text-fill:white
+}
+
+/*#################### MAIN TOOLBAR ###################*/
+.mainToolBarStyle{
+
+    -fx-background-color: darkslategrey;
+}
+
+
+.logoutButton{
+    -fx-background-image: url('../images/home.png');
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+
+    -fx-border-color: transparent;
+    -fx-border-width:0;
+
+
 }
