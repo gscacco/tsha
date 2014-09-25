@@ -3,15 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package events;
+package managers.interfaces;
+
+import mvc.controller.interfaces.IService;
+
 
 /**
  *
  * @author mpanagrosso
  */
-public enum SessionEvent {
-    
-    SESSION_ENTERED, 
-    SESSION_EXITED
+public interface IServiceManager {
+
+
+    public void register(Object topic, IService service);
+
+    public void execute(Object topic);
     
 }

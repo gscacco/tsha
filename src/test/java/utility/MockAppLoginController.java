@@ -6,10 +6,7 @@
 package utility;
 
 import constants.PropertiesReader;
-import unita.*;
-import javafx.application.Application;
 import javafx.stage.Stage;
-import managers.interfaces.IAccountManager;
 import mvc.controller.LoginController;
 
 /**
@@ -26,8 +23,8 @@ public class MockAppLoginController extends MockApp {
     public void startSpecifiedComponents() {
         accountManager = new FakeAccountManager();
         accountManager.setValidationResult(accountManagerResult);
-        LoginController controller = new LoginController(accountManager,new FakeCommunicationManager(), new Stage(), new PropertiesReader());
-        controller.execute(primaryStage);
+        LoginController controller = new LoginController(accountManager,new FakeCommunicationManager(),primaryStage, new Stage(), new PropertiesReader());
+        controller.execute();
     }
 
     public static FakeAccountManager getAccountManager() {

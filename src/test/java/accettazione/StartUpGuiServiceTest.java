@@ -1,17 +1,17 @@
-package unita;
+package accettazione;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.scene.Parent;
 import mvc.controller.TshaMainBarController;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
-import org.loadui.testfx.utils.FXTestUtils;
 import mvc.controller.interfaces.IService;
 import utility.MockAppStartUpGuiService;
+import utility.SetUpTestUtility;
 
 /**
  *
@@ -23,20 +23,12 @@ public class StartUpGuiServiceTest {
 
     @BeforeClass
     public static void setUp() {
-        FXTestUtils.launchApp(MockAppStartUpGuiService.class);
-
-        controller = new GuiTest() {
-            @Override
-            protected Parent getRootNode() {
-                return MockAppStartUpGuiService.getStage().getScene().getRoot();
-            }
-        };
-
+        controller = SetUpTestUtility.getGuiTestInstance(MockAppStartUpGuiService.class);
         controller.doubleClick();
 
     }
 
-   @Test
+    @Test
     public void shouldServiceSetMainBarAndJFrame() {
         //setup
         IService service = MockAppStartUpGuiService.getService();
@@ -47,7 +39,7 @@ public class StartUpGuiServiceTest {
         } catch (InterruptedException ex) {
             Logger.getLogger(StartUpGuiServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
         TshaMainBarController mainToolBar = controller.find("#mainBar");
 
         //verify

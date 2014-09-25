@@ -2,7 +2,7 @@ package mvc.controller;
 
 import constants.IPropertyReader;
 import mvc.controller.interfaces.BaseController;
-import events.SessionEvent;
+import events.Events;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -38,6 +38,7 @@ public class LoginController extends AnchorPane implements BaseController, IServ
     private Stage stage;
     private static String INVALID_CREDENTIALS = "Invalid credentials";
     private TranslateTransition moveErrorPanel;
+    private Stage primaryStage;
 
     @FXML
     private Button login;
@@ -53,8 +54,9 @@ public class LoginController extends AnchorPane implements BaseController, IServ
     private IAccountManager accountManager;
     private ICommunicationManager communicationManager;
 
-    public LoginController(IAccountManager accountManager, ICommunicationManager communicationManager, Stage stage, IPropertyReader propertiesReader) {
+    public LoginController(IAccountManager accountManager, ICommunicationManager communicationManager, Stage primaryStage, Stage stage, IPropertyReader propertiesReader) {
         this.stage = stage;
+        this.primaryStage = primaryStage;
         this.accountManager = accountManager;
         this.communicationManager = communicationManager;
         communicationManager.register(this);
@@ -80,7 +82,9 @@ public class LoginController extends AnchorPane implements BaseController, IServ
         Scene scene = new Scene(this);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.DECORATED);
+        stage.setResizable(false);
+       
         stage.centerOnScreen();
 
         moveErrorPanel = new TranslateTransition(Duration.seconds(0.5), errorPanel);
@@ -125,16 +129,11 @@ public class LoginController extends AnchorPane implements BaseController, IServ
         stage.hide();
     }
 
-    @Override
-    public void execute(Stage primaryStage) {
-        stage.initOwner(primaryStage);
-        stage.show();
 
-    }
     
    @Override
-    public void showView(Stage primaryStage) {
-        stage.initOwner(primaryStage);
+    public void showView(Stage OwnerStage) {
+        stage.initOwner(OwnerStage);
         stage.show();
 
     }
@@ -142,7 +141,7 @@ public class LoginController extends AnchorPane implements BaseController, IServ
 
         if (accountManager.checkUserValidity(usernameField.getText(), passwordField.getText())) {
             hideView();
-            communicationManager.post(SessionEvent.SESSION_ENTERED);
+            communicationManager.post(Events.SESSION_ENTERED);
         } else {
             errorLabel.setText(INVALID_CREDENTIALS);
             moveErrorPanel(-60, 80);
@@ -151,8 +150,14 @@ public class LoginController extends AnchorPane implements BaseController, IServ
 
     @Override
     public void execute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        showView(primaryStage);
+    }
 
+    @Override
+    public void release() {
+        hideView();
+        usernameField.setText("");
+        passwordField.setText("");
     }
 
 }

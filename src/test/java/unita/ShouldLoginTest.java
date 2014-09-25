@@ -18,7 +18,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
+import static unita.ShouldErrorPanelDisapperAfterKeyPressed.controller;
 import utility.MockAppLoginController;
+import utility.SetUpTestUtility;
 import utility.UniqueGenerator;
 
 /**
@@ -33,18 +35,14 @@ public class ShouldLoginTest {
     private static Node passwordField;
     static GuiTest controller;
 
+    
+ 
+    
+    
+    
     @BeforeClass
     public static void setUp() {
-
-        FXTestUtils.launchApp(MockAppLoginController.class);
-
-        controller = new GuiTest() {
-            @Override
-            protected Parent getRootNode() {
-                return MockAppLoginController.getStage().getScene().getRoot();
-            }
-        };
-
+        controller = SetUpTestUtility.getGuiTestInstance(MockAppLoginController.class);
         controller.doubleClick();
         setUpNeededControls();
     }
@@ -75,11 +73,8 @@ public class ShouldLoginTest {
 
     @AfterClass
     public static void shutdownAll() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                TshaApplication.getStage().close();
-            }
+        Platform.runLater(() -> {
+            MockAppLoginController.getStage().close();
         });
 
     }

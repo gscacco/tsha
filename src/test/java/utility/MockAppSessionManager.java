@@ -24,27 +24,25 @@ public class MockAppSessionManager extends MockApp {
     boolean accountManagerResult = false;
     private static FakeCommunicationManager fakeCommmunicator;
     private SessionManager sessionManager;
-    private static SpyStartUpGuiService spyService;
+    private static FakeServiceManager fakeServiceManager;
 
     @Override
 
     public void startSpecifiedComponents() {
         fakeCommmunicator = new FakeCommunicationManager();
-
-        spyService = new SpyStartUpGuiService();
-        spyService.setExecuteReturnValue(true);
-        sessionManager = new SessionManager(primaryStage, fakeCommmunicator, spyService, new LoginController(new FakeAccountManager(), fakeCommmunicator, new Stage(), new PropertiesReader()));
+        fakeServiceManager =  new FakeServiceManager();
+        sessionManager = new SessionManager(primaryStage, fakeCommmunicator,fakeServiceManager);
     }
 
+    public static FakeServiceManager getFakeServiceManager() {
+        return fakeServiceManager;
+    }
     public static FakeCommunicationManager getFakeCommunicator() {
 
         return fakeCommmunicator;
 
     }
 
-    public static SpyStartUpGuiService getSpyService() {
-        return spyService;
-    }
 
     public static void main(String[] args) {
         launch(args);

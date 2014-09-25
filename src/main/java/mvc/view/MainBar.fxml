@@ -12,6 +12,7 @@
         <URL value="@../../../resources/styles/fxml.css" />
     </stylesheets>   
     <children>
-        
+    <Button id="logoutButton" fx:id="logoutButton" layoutY="0.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="logoutButton" />
+
     </children>
 </fx:root>

@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mvc.controller.interfaces;
-
-import javafx.stage.Stage;
+package events;
 
 /**
  *
  * @author mpanagrosso
  */
-public interface IService {
-    public void execute();
-    public void release();
+public enum Events {
+
+    SESSION_WAITING_LOGIN,
+    SESSION_ENTERED,
+    SESSION_EXITED
+
 }

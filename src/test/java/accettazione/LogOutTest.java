@@ -5,31 +5,26 @@
  */
 package accettazione;
 
+import static accettazione.LoginPassedTest.controller;
 import engine.TshaApplication;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.loadui.testfx.GuiTest;
-import org.loadui.testfx.utils.FXTestUtils;
 import utility.SetUpTestUtility;
 
 /**
  *
  * @author mpanagrosso
  */
-public class LoginPassedTest {
+public class LogOutTest {
 
     private static Node loginPanel;
     private static Node loginButton;
     private static Node userNameField;
     private static Node passwordField;
-    static GuiTest controller;
+    private static Node mainToolBar;
+    private static Node logoutButton;
 
     @BeforeClass
     public static void setUp() {
@@ -46,36 +41,19 @@ public class LoginPassedTest {
         passwordField = loginPanel.lookup("#passwordField");
     }
 
-
     @Test
-    public void shouldLogin() {
-
-        //setup
-        //exercise
+    public void shouldLogOutAfterLogin() {
         controller.doubleClick();
         controller.click(userNameField).type("Utente1");
         controller.click(passwordField).type("Password1");
         controller.click(loginButton);
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(LoginPassedTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //verify
-        Assert.assertTrue(TshaApplication.getFrame().isVisible());
-        Assert.assertNotNull(controller.find("#mainBar"));
-        Assert.assertTrue(TshaApplication.getStage().getOpacity() == 0);
 
-    }
-
-    @AfterClass
-    public static void shutdownAll() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                TshaApplication.getStage().close();
-            }
-        });
+        mainToolBar = controller.find("#mainBar");
+        logoutButton = mainToolBar.lookup("#logoutButton");
+        controller.click(logoutButton);
+        Assert.assertFalse(mainToolBar.isVisible());
+        Assert.assertFalse(TshaApplication.getFrame().isVisible());
+//       Assert.assertTrue(loginPanel.isVisible());
 
     }
 }

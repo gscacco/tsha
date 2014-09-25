@@ -6,10 +6,10 @@
 package managers;
 
 import com.google.common.eventbus.Subscribe;
-import events.SessionEvent;
+import events.Events;
 import javafx.stage.Stage;
 import managers.interfaces.ICommunicationManager;
-import mvc.controller.interfaces.IService;
+import managers.interfaces.IServiceManager;
 
 /**
  *
@@ -18,24 +18,22 @@ import mvc.controller.interfaces.IService;
 public class SessionManager {
 
     private Stage primaryStage;
+private IServiceManager serviceManager;
 
-    private IService startUpGuiController;
-    private IService loginController;
 
-    public SessionManager(Stage primaryStage, ICommunicationManager communicationManager, IService startUpGuiController, IService loginController) {
+    public SessionManager(Stage primaryStage, ICommunicationManager communicationManager, IServiceManager serviceManager) {
+      
         this.primaryStage = primaryStage;
+        this.serviceManager = serviceManager;
         communicationManager.register(this);
-        this.startUpGuiController = startUpGuiController;
-        this.loginController = loginController;
-        loginController.execute(primaryStage);
-
+        serviceManager.execute(Events.SESSION_WAITING_LOGIN);
+   
     }
 
     @Subscribe
-    public void handleSessionChange(SessionEvent event) {
-        if (event == SessionEvent.SESSION_ENTERED) {
-            startUpGuiController.execute();
-        }
+    public void handleSessionChange(Events event) {
+        serviceManager.execute(event);
+        
     }
 
 }

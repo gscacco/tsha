@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import mvc.controller.TshaMainBarController;
 import mvc.controller.interfaces.IService;
 import mvc.controller.StartUpGuiController;
+import mvc.view.TshaJFrame;
 
 /**
  *
@@ -20,7 +21,7 @@ import mvc.controller.StartUpGuiController;
 public class MockAppStartUpGuiService extends MockApp {
 
     private static IService startUpGuiService;
-    private static JFrame frame;
+    private static TshaJFrame frame;
     private static TshaMainBarController mainBar;
     private static Dimension screenSize;
     private static Stage mainToolBarStage;
@@ -36,9 +37,9 @@ public class MockAppStartUpGuiService extends MockApp {
     @Override
     public void startSpecifiedComponents() {
 
-        frame = new JFrame();
+        frame = new TshaJFrame();
         mainToolBarStage = new Stage();
-        mainBar = new TshaMainBarController(mainToolBarStage, new PropertiesReader());
+        mainBar = new TshaMainBarController(primaryStage,mainToolBarStage,new FakeCommunicationManager(), new PropertiesReader());
         screenSize = UniqueGenerator.getRandomDimension();
         startUpGuiService = new StartUpGuiController(primaryStage, frame, mainBar, screenSize);
     }

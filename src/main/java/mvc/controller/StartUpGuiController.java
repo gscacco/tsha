@@ -5,17 +5,13 @@
  */
 package mvc.controller;
 
-import gov.nasa.worldwind.render.airspaces.ScreenSizeDetailLevel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import mvc.controller.TshaMainBarController;
-import mvc.controller.TshaMainBarController;
 import mvc.controller.interfaces.IService;
-import mvc.controller.interfaces.IService;
+import mvc.view.TshaJFrame;
 
 /**
  *
@@ -24,12 +20,12 @@ import mvc.controller.interfaces.IService;
 public class StartUpGuiController implements IService {
 
     public static final int TOOLBARHEIGHT = 50;
-    private JFrame frame;
+    private TshaJFrame frame;
     private TshaMainBarController mainBar;
     private Dimension screenSize;
     private Stage primaryStage;
 
-    public StartUpGuiController(Stage primaryStage, JFrame frame, TshaMainBarController mainBar, Dimension screenSize) {
+    public StartUpGuiController(Stage primaryStage, TshaJFrame frame, TshaMainBarController mainBar, Dimension screenSize) {
         this.primaryStage = primaryStage;
         this.frame = frame;
         this.mainBar = mainBar;
@@ -42,6 +38,7 @@ public class StartUpGuiController implements IService {
             @Override
             public void run() {
                 setFrame();
+                frame.execute();
 
             }
         });
@@ -56,6 +53,12 @@ public class StartUpGuiController implements IService {
 
     }
 
+    @Override
+    public void release() {
+        mainBar.release();
+        frame.release();
+    }
+
     private void setFrame() {
         frame.setAlwaysOnTop(true);
         frame.setUndecorated(true);
@@ -65,7 +68,7 @@ public class StartUpGuiController implements IService {
         int xPos = width / 2 - screenSize.width / 2;
         int yPos = height / 2 - screenSize.height / 2;
         frame.setLocation(xPos, yPos);
-        frame.setVisible(true);
+
     }
 
     private void setMainToolBar() {
@@ -80,8 +83,4 @@ public class StartUpGuiController implements IService {
 
     }
 
-    @Override
-    public void execute(Stage stage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

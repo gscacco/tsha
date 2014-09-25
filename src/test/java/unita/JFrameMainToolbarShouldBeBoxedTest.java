@@ -5,14 +5,12 @@
  */
 package unita;
 
-import events.SessionEvent;
+import engine.TshaApplication;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.Parent;
-import managers.SessionManager;
-import mvc.controller.TshaMainBarController;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -20,8 +18,8 @@ import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
 import mvc.controller.interfaces.IService;
-import utility.MockAppSessionManager;
 import utility.MockAppStartUpGuiService;
+import utility.SetUpTestUtility;
 
 /**
  *
@@ -33,15 +31,8 @@ public class JFrameMainToolbarShouldBeBoxedTest {
 
     @BeforeClass
     public static void setUp() {
-        FXTestUtils.launchApp(MockAppStartUpGuiService.class);
 
-        controller = new GuiTest() {
-            @Override
-            protected Parent getRootNode() {
-                return MockAppStartUpGuiService.getStage().getScene().getRoot();
-            }
-        };
-
+        controller = SetUpTestUtility.getGuiTestInstance(MockAppStartUpGuiService.class);
         controller.doubleClick();
 
     }
@@ -52,7 +43,7 @@ public class JFrameMainToolbarShouldBeBoxedTest {
         IService service = MockAppStartUpGuiService.getService();
         service.execute();
         //exercise
-  
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {

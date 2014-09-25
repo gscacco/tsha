@@ -5,23 +5,17 @@
  */
 package unita;
 
-import engine.TshaApplication;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
-import mvc.controller.LoginController;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
-import org.loadui.testfx.controls.Commons;
-import org.loadui.testfx.utils.FXTestUtils;
 import utility.MockAppLoginController;
+import utility.SetUpTestUtility;
 import utility.UniqueGenerator;
 
 /**
@@ -41,14 +35,7 @@ public class ShouldErrorPanelDisapperAfterKeyPressed {
 
     @BeforeClass
     public static void setUp() {
-        FXTestUtils.launchApp(MockAppLoginController.class);
-
-        controller = new GuiTest() {
-            @Override
-            protected Parent getRootNode() {
-                return MockAppLoginController.getStage().getScene().getRoot();
-            }
-        };
+        controller = SetUpTestUtility.getGuiTestInstance(MockAppLoginController.class);
         controller.doubleClick();
         setUpNeededControls();
     }
@@ -73,15 +60,13 @@ public class ShouldErrorPanelDisapperAfterKeyPressed {
 
         controller.click(passwordField).type(UniqueGenerator.getString());
         controller.click(loginButton);
-                try {
+        try {
             Thread.sleep(500);
         } catch (InterruptedException ex) {
             Logger.getLogger(ShouldNotLoginTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
 
         controller.click(userNameField).type("23");
-     
 
         //lo sleep serve perchè l'assert deve essere eseguito dopo che la transizione è completata
         try {
@@ -90,18 +75,14 @@ public class ShouldErrorPanelDisapperAfterKeyPressed {
             Logger.getLogger(ShouldNotLoginTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    
         //verify
-        Assert.assertEquals(errorPanel.getTranslateY(),-60.0, 0);
+        Assert.assertEquals(errorPanel.getTranslateY(), -60.0, 0);
     }
 
     @AfterClass
     public static void shutdownAll() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                MockAppLoginController.getStage().close();
-            }
+        Platform.runLater(() -> {
+            MockAppLoginController.getStage().close();
         });
 
     }

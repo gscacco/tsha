@@ -15,31 +15,28 @@ import mvc.controller.interfaces.IService;
  *
  * @author mpanagrosso
  */
-public class SpyStartUpGuiService implements IService {
+public class SpyiService implements IService {
 
-    boolean value = false;
+    boolean isReleased = false;
     boolean previouslyExecuted = false;
-
-    public SpyStartUpGuiService() {
-
-    }
-
-    public void setExecuteReturnValue(boolean value) {
-        this.value = value;
-    }
 
     @Override
     public void execute() {
         previouslyExecuted = true;
-       
+
     }
 
-    public boolean getPreviouslyExecuted() {
+    public boolean verifyIsExecuted() {
         return previouslyExecuted;
     }
 
-    @Override
-    public void execute(Stage stage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean verifyIsReleased() {
+        return isReleased;
     }
+
+    @Override
+    public void release() {
+        isReleased = true;
+    }
+
 }

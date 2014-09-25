@@ -5,23 +5,17 @@
  */
 package unita;
 
-import engine.TshaApplication;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
-import mvc.controller.LoginController;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
-import org.loadui.testfx.controls.Commons;
-import org.loadui.testfx.utils.FXTestUtils;
 import utility.MockAppLoginController;
+import utility.SetUpTestUtility;
 import utility.UniqueGenerator;
 
 /**
@@ -40,14 +34,7 @@ public class ShouldNotLoginTest {
 
     @BeforeClass
     public static void setUp() {
-        FXTestUtils.launchApp(MockAppLoginController.class);
-
-        controller = new GuiTest() {
-            @Override
-            protected Parent getRootNode() {
-                return MockAppLoginController.getStage().getScene().getRoot();
-            }
-        };
+        controller = SetUpTestUtility.getGuiTestInstance(MockAppLoginController.class);
         controller.doubleClick();
         setUpNeededControls();
     }
@@ -71,7 +58,6 @@ public class ShouldNotLoginTest {
         controller.click(userNameField).type(UniqueGenerator.getString());
         controller.click(passwordField).type(UniqueGenerator.getString());
         controller.click(loginButton);
-        
 
         //verify
         Assert.assertTrue(loginPanel.isVisible());
@@ -85,8 +71,6 @@ public class ShouldNotLoginTest {
         Assert.assertTrue(controller.exists("Invalid credentials"));
 
     }
-
-
 
     @AfterClass
     public static void shutdownAll() {
