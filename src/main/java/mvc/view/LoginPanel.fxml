@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<fx:root id="loginPanel" fx:id="root" prefHeight="308.0" prefWidth="400.0" styleClass="loginPanel" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@../../../resources/styles/fxml.css" />
+    </stylesheets>   
+    <children>
+        <AnchorPane id="errorPanel" fx:id="errorPanel" layoutX="15.0" layoutY="-60" prefHeight="60.0" prefWidth="370.0" styleClass="errorPanel" visible="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+            <children>
+                <Label id="errorLabel" fx:id="errorLabel" styleClass="errorLabel" layoutX="60.0" layoutY="20.0" text="error" />
+            </children>
+        </AnchorPane>
+        <Label id="usernameLabel" fx:id="usernameLabel" styleClass="usernameLabel" layoutX="40.0" layoutY="100.0" prefWidth="100.0" text="User Name" />
+        <TextField id="usernameField" fx:id="usernameField" layoutX="140.0" layoutY="100.0" prefWidth="150.0" />
+        <Label id="passwordLabel" fx:id="passwordLabel" layoutX="40.0" layoutY="150.0" prefWidth="100.0" text="Password" />
+        <PasswordField id="passwordField" fx:id="passwordField" layoutX="140.0" layoutY="150.0" prefWidth="150.0" />
+        <Button id="login" fx:id="login" styleClass = "login" layoutX="140.0" layoutY="220.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="80.0" text="Login" />
+    </children>
+</fx:root>
