@@ -59,8 +59,8 @@ public class TshaMainBarController extends AnchorPane implements BaseController,
     }
 
     @Override
-    public void showView(Stage OwnerStage) {
-        stage.initOwner(OwnerStage);
+    public void showView() {
+        this.setVisible(true);
         stage.show();
 
     }
@@ -77,7 +77,7 @@ public class TshaMainBarController extends AnchorPane implements BaseController,
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setAlwaysOnTop(true);
-
+        stage.initOwner(primaryStage);
         logoutButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -100,7 +100,8 @@ public class TshaMainBarController extends AnchorPane implements BaseController,
 
     @Override
     public void execute() {
-        showView(primaryStage);
+
+        showView();
     }
 
     @Override

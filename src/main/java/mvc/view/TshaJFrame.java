@@ -14,6 +14,10 @@ import mvc.controller.interfaces.IService;
  */
 public class TshaJFrame extends JFrame implements IService {
 
+    public TshaJFrame(){
+    setAlwaysOnTop(true);
+    setUndecorated(true);
+    }
     @Override
     public void execute() {
         setVisible(true);

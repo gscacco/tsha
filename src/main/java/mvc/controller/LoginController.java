@@ -80,13 +80,14 @@ public class LoginController extends AnchorPane implements BaseController, IServ
     @Override
     public void initStage() {
         Scene scene = new Scene(this);
+
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
         stage.setResizable(false);
-       
-        stage.centerOnScreen();
 
+        stage.centerOnScreen();
+        stage.initOwner(primaryStage);
         moveErrorPanel = new TranslateTransition(Duration.seconds(0.5), errorPanel);
         login.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -127,16 +128,17 @@ public class LoginController extends AnchorPane implements BaseController, IServ
     public void hideView() {
         this.setVisible(false);
         stage.hide();
+        usernameField.setText("");
+        passwordField.setText("");
     }
 
-
-    
-   @Override
-    public void showView(Stage OwnerStage) {
-        stage.initOwner(OwnerStage);
+    @Override
+    public void showView() {
+        this.setVisible(true);
         stage.show();
 
     }
+
     public void manageLogin() {
 
         if (accountManager.checkUserValidity(usernameField.getText(), passwordField.getText())) {
@@ -150,7 +152,7 @@ public class LoginController extends AnchorPane implements BaseController, IServ
 
     @Override
     public void execute() {
-        showView(primaryStage);
+        showView();
     }
 
     @Override

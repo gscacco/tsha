@@ -47,7 +47,7 @@ public class TshaApplication extends Application {
         IPropertyReader propertiesReader = new PropertiesReader();
 
         //Services
-        ResourcesReleaser releaser = new ResourcesReleaser();
+        ResourcesReleaser releaser = new ResourcesReleaser(communicationManager);
 
         //Scene Objects
         frame = new TshaJFrame();

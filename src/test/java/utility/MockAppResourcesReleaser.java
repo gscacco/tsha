@@ -21,7 +21,7 @@ public class MockAppResourcesReleaser extends MockApp {
 
     @Override
     public void startSpecifiedComponents() {
-        releaser = new ResourcesReleaser();
+        releaser = new ResourcesReleaser(new FakeCommunicationManager());
         
        
     }

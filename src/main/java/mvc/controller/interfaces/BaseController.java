@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public interface BaseController {
     public void initStage();
-    public void showView(Stage stage);
+    public void showView();
     public void hideView();
     
 }

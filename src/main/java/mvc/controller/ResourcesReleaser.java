@@ -6,7 +6,9 @@
 package mvc.controller;
 
 import com.google.common.eventbus.Subscribe;
+import events.Events;
 import java.util.ArrayList;
+import managers.interfaces.ICommunicationManager;
 import mvc.controller.interfaces.IService;
 
 /**
@@ -15,11 +17,18 @@ import mvc.controller.interfaces.IService;
  */
 public class ResourcesReleaser implements IService {
 
+    ICommunicationManager communicationManager;
+
+    public ResourcesReleaser(ICommunicationManager communicationManager) {
+        this.communicationManager = communicationManager;
+    }
+
     ArrayList<IService> registeredResources = new ArrayList<>();
 
     @Override
     public void execute() {
         release();
+
     }
 
     @Override
@@ -27,6 +36,7 @@ public class ResourcesReleaser implements IService {
         for (IService registeredResource : registeredResources) {
 
             registeredResource.release();
+            communicationManager.post(Events.SESSION_WAITING_LOGIN);
         }
     }
 

@@ -57,11 +57,11 @@ public class StartUpGuiController implements IService {
     public void release() {
         mainBar.release();
         frame.release();
+        primaryStage.setOpacity(1);
     }
 
     private void setFrame() {
-        frame.setAlwaysOnTop(true);
-        frame.setUndecorated(true);
+
         frame.setSize(new Dimension(screenSize.width, screenSize.height - TOOLBARHEIGHT));
         int width = Toolkit.getDefaultToolkit().getScreenSize().width;
         int height = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -79,7 +79,7 @@ public class StartUpGuiController implements IService {
         int xPos = width / 2 - screenSize.width / 2;
         int yPos = (height / 2 - screenSize.height / 2) + screenSize.height - TOOLBARHEIGHT;
         mainBar.setLocation(xPos, yPos);
-        mainBar.showView(primaryStage);
+        mainBar.showView();
 
     }
 
