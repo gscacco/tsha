@@ -4,22 +4,22 @@
 
 /*Caspian ovrriding*/
 
-.root{
 
 
-}
 
 
 /*Panels layout*/
 
-
 /*#################### LOGIN PANEL ###################*/
 .loginPanel{
-    -fx-border-width: 2;
-    -fx-border-color: silver;
+    -fx-background-radius: 10;
 
+    -fx-border-radius: 10;
+    -fx-effect: innershadow(gaussian, rgba(100, 100, 100, 1), 15, 0.5, 0, 0);
 
-
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-border-color: black;
 }
 
 .loginPanel .label, .button{
@@ -34,7 +34,14 @@
 }
 
 .loginPanel .login{
-    -fx-background-color: linear-gradient(#64d5de, #1cd5ed);
+    -fx-background-color: linear-gradient(#3b3e37, #676d5d);
+    -fx-text-fill:white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+
+}
+
+.loginPanel .shutDownButton{
+    -fx-background-color: linear-gradient(#3b3e37, #676d5d);
     -fx-text-fill:white;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 
@@ -47,8 +54,8 @@
     -fx-border-color: red;
     -fx-border-width: 2;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
-    -fx-background-image: url("../images/error.png");
-    -fx-background-size: 35 35;
+    -fx-background-image: url("../images/alert.png");
+
     -fx-background-repeat: no-repeat;
     -fx-background-position:10; 
     -fx-background-color: #cfe3b4;
@@ -59,8 +66,9 @@
 
 /*#################### MAIN TOOLBAR ###################*/
 .mainToolBarStyle{
+    -fx-background-color:#d3e6ed;
+        -fx-effect: innershadow(one-pass-box, rgba(100, 100, 100, 1), 15, 0.5, 0, 0);
 
-    -fx-background-color: darkslategrey;
 }
 
 
@@ -68,9 +76,12 @@
     -fx-background-image: url('../images/home.png');
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
-
+    -fx-background-position:5, 5; 
     -fx-border-color: transparent;
     -fx-border-width:0;
 
 
 }
+
+
+

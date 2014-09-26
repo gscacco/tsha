@@ -6,9 +6,12 @@
 package utility;
 
 import constants.PropertiesReader;
+import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import java.awt.Dimension;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javax.swing.JFrame;
+import managers.CommmunicationManager;
 import mvc.controller.TshaMainBarController;
 import mvc.controller.interfaces.IService;
 import mvc.controller.StartUpGuiController;
@@ -37,9 +40,9 @@ public class MockAppStartUpGuiService extends MockApp {
     @Override
     public void startSpecifiedComponents() {
 
-        frame = new TshaJFrame();
+        frame = new TshaJFrame(new WorldWindowGLCanvas());
         mainToolBarStage = new Stage();
-        mainBar = new TshaMainBarController(primaryStage,mainToolBarStage,new FakeCommunicationManager(), new PropertiesReader());
+        mainBar = new TshaMainBarController(primaryStage,mainToolBarStage,new CommmunicationManager(), new PropertiesReader());
         screenSize = UniqueGenerator.getRandomDimension();
         startUpGuiService = new StartUpGuiController(primaryStage, frame, mainBar, screenSize);
     }
@@ -52,4 +55,6 @@ public class MockAppStartUpGuiService extends MockApp {
         return mainToolBarStage;
     }
 
+    public static void close(){
+    Platform.exit();}
 }

@@ -1,6 +1,7 @@
 package mvc.controller;
 
 import constants.IPropertyReader;
+import engine.TshaApplication;
 import mvc.controller.interfaces.BaseController;
 import events.Events;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +23,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -39,9 +43,13 @@ public class LoginController extends AnchorPane implements BaseController, IServ
     private static String INVALID_CREDENTIALS = "Invalid credentials";
     private TranslateTransition moveErrorPanel;
     private Stage primaryStage;
+    private double errorPanelHeight;
+    private final double errorPanePositionOffset = 20.0;
 
     @FXML
     private Button login;
+    @FXML
+    private Button shutDownButton;
     @FXML
     private TextField usernameField;
     @FXML
@@ -79,11 +87,16 @@ public class LoginController extends AnchorPane implements BaseController, IServ
 
     @Override
     public void initStage() {
-        Scene scene = new Scene(this);
 
+        errorPanelHeight = errorPanel.getPrefHeight();
+
+        Scene scene = new Scene(this);
+        stage.initStyle(StageStyle.TRANSPARENT);
+
+        scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.DECORATED);
+
         stage.setResizable(false);
 
         stage.centerOnScreen();
@@ -97,12 +110,20 @@ public class LoginController extends AnchorPane implements BaseController, IServ
             }
         });
 
+        shutDownButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                Platform.exit();
+            }
+        });
+
         passwordField.setOnKeyTyped(new EventHandler<KeyEvent>() {
 
             @Override
             public void handle(KeyEvent event) {
-                if (moveErrorPanel.getToY() == 80) {
-                    moveErrorPanel(80, -60);
+                if (moveErrorPanel.getToY() == errorPanelHeight + errorPanePositionOffset) {
+                    moveErrorPanel(errorPanelHeight + errorPanePositionOffset, -errorPanelHeight);
                 }
             }
         });
@@ -110,15 +131,15 @@ public class LoginController extends AnchorPane implements BaseController, IServ
 
             @Override
             public void handle(KeyEvent event) {
-                if (moveErrorPanel.getToY() == 80) {
-                    moveErrorPanel(80, -60);
+                if (moveErrorPanel.getToY() == errorPanelHeight + errorPanePositionOffset) {
+                    moveErrorPanel(errorPanelHeight + errorPanePositionOffset, -errorPanelHeight);
                 }
             }
         });
 
     }
 
-    private void moveErrorPanel(int initialPos, int finalPos) {
+    private void moveErrorPanel(double initialPos, double finalPos) {
         moveErrorPanel.setFromY(initialPos);
         moveErrorPanel.setToY(finalPos);
         moveErrorPanel.play();
@@ -146,7 +167,7 @@ public class LoginController extends AnchorPane implements BaseController, IServ
             communicationManager.post(Events.SESSION_ENTERED);
         } else {
             errorLabel.setText(INVALID_CREDENTIALS);
-            moveErrorPanel(-60, 80);
+            moveErrorPanel(-errorPanelHeight, errorPanelHeight + errorPanePositionOffset);
         }
     }
 
