@@ -59,4 +59,6 @@ public class LogOutTest {
         Assert.assertTrue(loginPanel.isVisible());
 
     }
+    
+    
 }

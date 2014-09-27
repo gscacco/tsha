@@ -5,6 +5,8 @@
  */
 package mvc.view;
 
+import gov.nasa.worldwind.BasicModel;
+import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import javax.swing.JFrame;
 import mvc.controller.interfaces.IService;
 
@@ -13,18 +15,23 @@ import mvc.controller.interfaces.IService;
  * @author mpanagrosso
  */
 public class TshaJFrame extends JFrame implements IService {
+    private WorldWindowGLCanvas wwd;
 
-    public TshaJFrame(){
-    setAlwaysOnTop(true);
-    setUndecorated(true);
+    public TshaJFrame(WorldWindowGLCanvas wwd) {
+        setAlwaysOnTop(true);
+        setUndecorated(true);
+        this.wwd = wwd;
+        this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
+        wwd.setModel(new BasicModel());
     }
-    @Override
-    public void execute() {
+
+@Override
+        public void execute() {
         setVisible(true);
     }
 
     @Override
-    public void release() {
+        public void release() {
         setVisible(false);
     }
 
