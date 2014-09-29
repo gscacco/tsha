@@ -53,12 +53,14 @@ public class LogOutTest {
         mainToolBar = controller.find("#mainBar");
         logoutButton = mainToolBar.lookup("#logoutButton");
         controller.click(logoutButton);
-      
+        Assert.assertTrue(controller.exists("Are you sure you want exit?"));
+        Node popup = controller.find("#popUpConfirm");
+        Node yesButton = popup.lookup("#yesButton");
+        controller.click(yesButton);
         Assert.assertFalse(mainToolBar.isVisible());
         Assert.assertFalse(TshaApplication.getFrame().isVisible());
         Assert.assertTrue(loginPanel.isVisible());
 
     }
-    
-    
+
 }

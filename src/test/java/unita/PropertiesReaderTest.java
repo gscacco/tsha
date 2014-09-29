@@ -19,7 +19,7 @@ public class PropertiesReaderTest {
     
     @BeforeClass
     public static void setUp(){
-     reader = new PropertiesReader();
+     reader = new PropertiesReader("src\\main\\resources\\config\\tshaconfig.properties");
     }
     
     

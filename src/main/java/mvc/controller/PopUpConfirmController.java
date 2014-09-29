@@ -7,54 +7,60 @@ package mvc.controller;
 
 import constants.IPropertyReader;
 import events.Events;
-import mvc.controller.interfaces.BaseController;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import managers.interfaces.ICommunicationManager;
+import mvc.controller.interfaces.BaseController;
 import mvc.controller.interfaces.IService;
 
 /**
  *
  * @author mpanagrosso
  */
-public class TshaMainBarController extends AnchorPane implements BaseController,
-                                                                 IService {
+public class PopUpConfirmController extends AnchorPane implements BaseController {
 
     private Stage stage;
     private Stage primaryStage;
     private ICommunicationManager communicationManager;
-    private PopUpConfirmController confirmController;
+    private Events eventToFire;
     @FXML
-    private Button logoutButton;
+    private Label confirmMessage;
+    @FXML
+    Button yesButton;
+    @FXML
+    Button noButton;
 
-    public TshaMainBarController(Stage primaryStage, Stage stage, 
-                                ICommunicationManager communicationManager, 
-                                IPropertyReader propertiesReader, 
-                                PopUpConfirmController confirmController) {
+    public PopUpConfirmController(Stage primaryStage, Stage stage, ICommunicationManager communicationManager, IPropertyReader propertiesReader, Events event) {
         this.stage = stage;
         this.primaryStage = primaryStage;
         this.communicationManager = communicationManager;
-        this.confirmController  = confirmController;
+
+        this.eventToFire = event;
         java.nio.file.Path path = Paths.get("");
         FXMLLoader loader;
         try {
-            loader = new FXMLLoader(new URL("file:/" + 
-                                            path.toAbsolutePath().toString() + 
-                                            propertiesReader.readProperty("views") 
-                                            + "MainBar.fxml"));
+            loader = new FXMLLoader(new URL("file:/" + path.toAbsolutePath().toString() + propertiesReader.readProperty("views") + "PopUpConfirm.fxml"));
             loader.setRoot(this);
             loader.setController(this);
             loader.load();
@@ -65,6 +71,41 @@ public class TshaMainBarController extends AnchorPane implements BaseController,
         }
 
         initStage();
+    }
+
+    @Override
+    public void initStage() {
+        
+        confirmMessage.setWrapText(true);
+        confirmMessage.autosize();
+        confirmMessage.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(this);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.setOpacity(0.9);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setAlwaysOnTop(true);
+        stage.initOwner(primaryStage);
+
+        yesButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                hideView();
+                communicationManager.post(eventToFire);
+
+            }
+        });
+
+        noButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                hideView();
+            }
+        });
     }
 
     @Override
@@ -80,43 +121,8 @@ public class TshaMainBarController extends AnchorPane implements BaseController,
         stage.hide();
     }
 
-    @Override
-    public final void initStage() {
-        Scene scene = new Scene(this);
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setAlwaysOnTop(true);
-        stage.initOwner(primaryStage);
-        logoutButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                confirmController.setPopUpMessage("Are you sure you want exit?");
-                confirmController.showView();
-            }
-        });
-    }
-
-    public void setSize(double width, double height) {
-        stage.setWidth(width);
-        stage.setHeight(height);
-    }
-
-    public void setLocation(int xPos, int yPos) {
-        stage.setX(xPos);
-        stage.setY(yPos);
-
-    }
-
-    @Override
-    public void execute() {
-
-        showView();
-    }
-
-    @Override
-    public void release() {
-        hideView();
+    public void setPopUpMessage(String message) {
+       confirmMessage.setText(message);
     }
 
 }

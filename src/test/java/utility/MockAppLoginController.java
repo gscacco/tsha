@@ -23,7 +23,7 @@ public class MockAppLoginController extends MockApp {
     public void startSpecifiedComponents() {
         accountManager = new FakeAccountManager();
         accountManager.setValidationResult(accountManagerResult);
-        LoginController controller = new LoginController(accountManager,new FakeCommunicationManager(),primaryStage, new Stage(), new PropertiesReader());
+        LoginController controller = new LoginController(accountManager,new FakeCommunicationManager(),primaryStage, new Stage(), new PropertiesReader("src\\main\\resources\\config\\tshaconfig.properties"));
         controller.execute();
     }
 

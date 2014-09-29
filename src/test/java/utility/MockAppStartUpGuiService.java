@@ -6,12 +6,14 @@
 package utility;
 
 import constants.PropertiesReader;
+import events.Events;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import java.awt.Dimension;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import javax.swing.JFrame;
 import managers.CommmunicationManager;
+import mvc.controller.PopUpConfirmController;
 import mvc.controller.TshaMainBarController;
 import mvc.controller.interfaces.IService;
 import mvc.controller.StartUpGuiController;
@@ -42,7 +44,10 @@ public class MockAppStartUpGuiService extends MockApp {
 
         frame = new TshaJFrame(new WorldWindowGLCanvas());
         mainToolBarStage = new Stage();
-        mainBar = new TshaMainBarController(primaryStage,mainToolBarStage,new CommmunicationManager(), new PropertiesReader());
+        CommmunicationManager cm = new CommmunicationManager();
+        PropertiesReader pr = new PropertiesReader("src\\main\\resources\\config\\tshaconfig.properties");
+        PopUpConfirmController confirmController = new PopUpConfirmController(primaryStage, new Stage(), cm, pr, Events.SESSION_EXITED);
+        mainBar = new TshaMainBarController(primaryStage, mainToolBarStage, cm, pr, confirmController);
         screenSize = UniqueGenerator.getRandomDimension();
         startUpGuiService = new StartUpGuiController(primaryStage, frame, mainBar, screenSize);
     }
@@ -55,6 +60,7 @@ public class MockAppStartUpGuiService extends MockApp {
         return mainToolBarStage;
     }
 
-    public static void close(){
-    Platform.exit();}
+    public static void close() {
+        Platform.exit();
+    }
 }

@@ -18,9 +18,10 @@ public class PropertiesReader extends Properties implements IPropertyReader {
 
     private boolean unixOSused;
 
-    public PropertiesReader() {
+    public PropertiesReader(String configurationFile) {
         try {
-            FileInputStream in = new FileInputStream("src\\main\\resources\\config\\tshaconfig.properties");
+//            "src\\main\\resources\\config\\tshaconfig.properties"
+            FileInputStream in = new FileInputStream(configurationFile);
             this.load(in);
             unixOSused = Boolean.parseBoolean(getProperty("UNIXOS_USED"));
         } catch (Exception e) {
