@@ -9,7 +9,7 @@
 
 <fx:root id="loginPanel" fx:id="root" prefHeight="308.0" prefWidth="400.0" styleClass="loginPanel" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
-        <URL value="@../../../resources/styles/fxml.css" />
+        <URL value="@../styles/fxml.css" />
     </stylesheets>   
     <children>
         <AnchorPane id="errorPanel" fx:id="errorPanel" layoutX="15.0" layoutY="-65" prefHeight="60.0" prefWidth="370.0" styleClass="errorPanel" visible="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">

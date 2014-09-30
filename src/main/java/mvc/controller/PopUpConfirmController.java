@@ -60,7 +60,7 @@ public class PopUpConfirmController extends AnchorPane implements BaseController
         java.nio.file.Path path = Paths.get("");
         FXMLLoader loader;
         try {
-            loader = new FXMLLoader(new URL("file:/" + path.toAbsolutePath().toString() + propertiesReader.readProperty("views") + "PopUpConfirm.fxml"));
+            loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/PopUpConfirm.fxml"));
             loader.setRoot(this);
             loader.setController(this);
             loader.load();

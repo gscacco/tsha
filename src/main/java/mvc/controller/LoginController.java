@@ -72,7 +72,9 @@ public class LoginController extends AnchorPane implements BaseController, IServ
         java.nio.file.Path path = Paths.get("");
         FXMLLoader loader;
         try {
-            loader = new FXMLLoader(new URL("file:/" + path.toAbsolutePath().toString() + propertiesReader.readProperty("views") + "LoginPanel.fxml"));
+   //         loader = new FXMLLoader(new URL("file:/" + path.toAbsolutePath().toString() + propertiesReader.readProperty("views") + "LoginPanel.fxml"));
+           loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/LoginPanel.fxml"));
+
             loader.setRoot(this);
             loader.setController(this);
             loader.load();

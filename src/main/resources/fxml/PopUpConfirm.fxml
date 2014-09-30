@@ -9,7 +9,7 @@
 
 <fx:root id="popUpConfirm" fx:id="popUpConfirm" prefHeight="150.0" prefWidth="260.0" styleClass="popUpConfirm" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
-        <URL value="@../../../resources/styles/fxml.css" />
+        <URL value="@../styles/fxml.css" />
     </stylesheets>   
     <children>
     <Label id="confirmMessage" fx:id="confirmMessage" layoutX="30.0" layoutY="30.0" styleClass="confirmMessage" />
