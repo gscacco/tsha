@@ -6,6 +6,7 @@
 package utility;
 
 import engine.TshaApplication;
+import java.nio.file.Paths;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import org.loadui.testfx.GuiTest;
@@ -18,7 +19,9 @@ import org.loadui.testfx.utils.FXTestUtils;
 public class SetUpTestUtility {
 
     public static GuiTest getGuiTestInstance(Class<? extends Application> appClass) {
-        FXTestUtils.launchApp(appClass);
+        
+        String[] args= {"-c", "src\\main\\resources\\config\\tshaconfig.properties"};
+        FXTestUtils.launchApp(appClass,args);
 
         return new GuiTest() {
             @Override

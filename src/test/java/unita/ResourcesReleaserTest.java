@@ -5,24 +5,13 @@
  */
 package unita;
 
-import java.awt.Dimension;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import mvc.controller.StartUpGuiController;
-import mvc.controller.TshaMainBarController;
-import mvc.controller.interfaces.BaseController;
-import mvc.controller.interfaces.IService;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import utility.MockAppResourcesReleaser;
-import utility.MockAppStartUpGuiService;
 import utility.SetUpTestUtility;
 import utility.SpyiService;
 

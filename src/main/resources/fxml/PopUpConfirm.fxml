@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<fx:root id="popUpConfirm" fx:id="popUpConfirm" prefHeight="150.0" prefWidth="260.0" styleClass="popUpConfirm" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@../styles/fxml.css" />
+    </stylesheets>   
+    <children>
+    <Label id="confirmMessage" fx:id="confirmMessage" layoutX="30.0" layoutY="30.0" styleClass="confirmMessage" />
+    <Button id="yesButton" fx:id="yesButton" layoutX="30.0" layoutY="100.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="80.0" styleClass="yesButton"  text="yes"/>
+    <Button id="noButton" fx:id="noButton" layoutX="150.0" layoutY="100.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="80.0" styleClass="noButton" text="no"/>
+
+    </children>
+</fx:root>

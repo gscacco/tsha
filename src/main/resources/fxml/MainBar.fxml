@@ -9,7 +9,7 @@
 
 <fx:root id="mainBar" fx:id="mainBar" prefHeight="100.0" prefWidth="400.0" styleClass="mainToolBarStyle" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
-        <URL value="@../../../resources/styles/fxml.css" />
+        <URL value="@../styles/fxml.css" />
     </stylesheets>   
     <children>
     <Button id="logoutButton" fx:id="logoutButton" layoutY="0.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="logoutButton" />
