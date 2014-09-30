@@ -50,7 +50,8 @@ public class TshaApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
-
+        String[] args = new String[getParameters().getRaw().size()];
+        parseCommandLineArguments((String[]) getParameters().getRaw().toArray(args));
         //MANAGERS//
         AccountManager accountManager = new AccountManager();
         CommmunicationManager communicationManager = new CommmunicationManager();
@@ -128,7 +129,7 @@ public class TshaApplication extends Application {
         return frame;
     }
 
-    private static void parseCommandLineArguments(String[] args) throws ParseException {
+    private void parseCommandLineArguments(String[] args) throws ParseException {
         Options options = new Options();
         options.addOption("c", "config", true, "Configuration properties file");
         options.addOption("h", "help", false, "Print help");
@@ -144,7 +145,6 @@ public class TshaApplication extends Application {
     }
 
     public static void main(String[] args) throws ParseException {
-        parseCommandLineArguments(args);
         launch(args);
 
     }
