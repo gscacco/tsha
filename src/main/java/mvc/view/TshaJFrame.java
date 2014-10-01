@@ -18,7 +18,6 @@ public class TshaJFrame extends JFrame implements IService {
     private WorldWindowGLCanvas wwd;
 
     public TshaJFrame(WorldWindowGLCanvas wwd) {
-        setAlwaysOnTop(true);
         setUndecorated(true);
         this.wwd = wwd;
         this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
