@@ -10,6 +10,5 @@ target/*
 *.log.*
 *.lck.*
 *.orig
-*.png
 nbactions.xml
 
