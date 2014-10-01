@@ -27,7 +27,7 @@ public class AccountManagerTest {
     public void shouldValidateRegisteredUsers() {
         Assert.assertTrue(manager.checkUserValidity("Utente1", "Password1"));
         Assert.assertTrue(manager.checkUserValidity("Utente2", "Password2"));
-        Assert.assertTrue(manager.checkUserValidity("Utente3", "Password3"));
+        Assert.assertTrue(manager.checkUserValidity("1", "1"));
 
     }
 }

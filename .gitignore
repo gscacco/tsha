@@ -12,4 +12,4 @@ target/*
 *.orig
 *.png
 nbactions.xml
-config/
+

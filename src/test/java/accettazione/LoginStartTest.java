@@ -5,6 +5,7 @@
  */
 package accettazione;
 
+import static accettazione.LoginPassedTest.controller;
 import engine.TshaApplication;
 import javafx.application.Platform;
 import javafx.scene.Parent;
@@ -14,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
+import utility.SetUpTestUtility;
 
 /**
  *
@@ -25,15 +27,8 @@ public class LoginStartTest {
 
     @BeforeClass
     public static void setUp() {
-        FXTestUtils.launchApp(TshaApplication.class);
-
-        controller = new GuiTest() {
-            @Override
-            protected Parent getRootNode() {
-                return TshaApplication.getStage().getScene().getRoot();
-            }
-        };
-
+        controller = SetUpTestUtility.getGuiTestInstance(TshaApplication.class);
+        controller.doubleClick();
     }
 
     @Test
