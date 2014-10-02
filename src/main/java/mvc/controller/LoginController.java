@@ -117,6 +117,7 @@ public class LoginController extends AnchorPane implements BaseController, IServ
             @Override
             public void handle(ActionEvent event) {
                 Platform.exit();
+                System.exit(0);
             }
         });
 
