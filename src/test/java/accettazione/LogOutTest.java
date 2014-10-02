@@ -7,8 +7,7 @@ package accettazione;
 
 import static accettazione.LoginPassedTest.controller;
 import engine.TshaApplication;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -60,7 +59,17 @@ public class LogOutTest {
         Assert.assertFalse(mainToolBar.isVisible());
         Assert.assertFalse(TshaApplication.getFrame().isVisible());
         Assert.assertTrue(loginPanel.isVisible());
+                
 
+    }
+        public static void shutdownAll(){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                TshaApplication.getStage().close();
+            }
+         });
+      
+        
     }
 
 }

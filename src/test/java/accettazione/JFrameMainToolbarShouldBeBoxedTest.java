@@ -5,18 +5,15 @@
  */
 package accettazione;
 
-import engine.TshaApplication;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.scene.Parent;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
-import org.loadui.testfx.utils.FXTestUtils;
 import mvc.controller.interfaces.IService;
 import utility.MockAppStartUpGuiService;
 import utility.SetUpTestUtility;
@@ -66,5 +63,6 @@ public class JFrameMainToolbarShouldBeBoxedTest {
                 MockAppStartUpGuiService.getStage().close();
             }
         });
+       
     }
 }

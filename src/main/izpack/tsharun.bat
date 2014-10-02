@@ -1,0 +1,1 @@
+java -Djava.library.path=dll -jar tsha-0.1-jar-with-dependencies.jar -c appconfig\tshaconfig.properties 

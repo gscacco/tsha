@@ -5,20 +5,13 @@
  */
 package unita;
 
-import engine.TshaApplication;
-import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
-import org.loadui.testfx.utils.FXTestUtils;
-import static unita.ShouldErrorPanelDisapperAfterKeyPressed.controller;
 import utility.MockAppLoginController;
 import utility.SetUpTestUtility;
 import utility.UniqueGenerator;

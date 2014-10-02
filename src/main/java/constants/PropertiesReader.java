@@ -20,7 +20,7 @@ public class PropertiesReader extends Properties implements IPropertyReader {
 
     public PropertiesReader(String configurationFile) {
         try {
-//            "src\\main\\resources\\config\\tshaconfig.properties"
+
             FileInputStream in = new FileInputStream(configurationFile);
             this.load(in);
             unixOSused = Boolean.parseBoolean(getProperty("UNIXOS_USED"));

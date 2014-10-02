@@ -5,16 +5,13 @@
  */
 package accettazione;
 
-import static accettazione.LoginPassedTest.controller;
 import engine.TshaApplication;
 import javafx.application.Platform;
-import javafx.scene.Parent;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
-import org.loadui.testfx.utils.FXTestUtils;
 import utility.SetUpTestUtility;
 
 /**
