@@ -17,23 +17,24 @@ import managers.interfaces.IServiceManager;
  */
 public class SessionManager {
 
-    private Stage primaryStage;
-private IServiceManager serviceManager;
+    private IServiceManager serviceManager;
 
-
-    public SessionManager(Stage primaryStage, ICommunicationManager communicationManager, IServiceManager serviceManager) {
-      
-        this.primaryStage = primaryStage;
+    public SessionManager(
+            Stage primaryStage, 
+            ICommunicationManager communicationManager, 
+            IServiceManager serviceManager) {
+        
+        
         this.serviceManager = serviceManager;
         communicationManager.register(this);
         serviceManager.execute(Events.SESSION_WAITING_LOGIN);
-   
+
     }
 
     @Subscribe
     public void handleSessionChange(Events event) {
         serviceManager.execute(event);
-        
+
     }
 
 }

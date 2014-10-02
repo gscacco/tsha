@@ -7,13 +7,12 @@ package accettazione;
 
 import engine.TshaApplication;
 import javafx.application.Platform;
-import javafx.scene.Parent;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
-import org.loadui.testfx.utils.FXTestUtils;
+import utility.SetUpTestUtility;
 
 /**
  *
@@ -25,14 +24,8 @@ public class ApplicationStartTest {
 
     @BeforeClass
     public static void setUp() {
-        FXTestUtils.launchApp(TshaApplication.class);
-
-        controller = new GuiTest() {
-            @Override
-            protected Parent getRootNode() {
-                return TshaApplication.getStage().getScene().getRoot();
-            }
-        };
+       controller = SetUpTestUtility.getGuiTestInstance(TshaApplication.class);
+        controller.doubleClick();
 
     }
 
@@ -40,7 +33,7 @@ public class ApplicationStartTest {
     public void shouldRun() {
         //setup
         controller.doubleClick();
-        //verify
+ 
         Assert.assertTrue(TshaApplication.getStage().isShowing());
 
     }
@@ -51,7 +44,7 @@ public class ApplicationStartTest {
                 TshaApplication.getStage().close();
             }
          });
-     
+  
     }
 
 }

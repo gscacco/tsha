@@ -7,7 +7,6 @@ package unita;
 
 import managers.ServiceManager;
 import managers.interfaces.IServiceManager;
-import mvc.controller.interfaces.IService;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

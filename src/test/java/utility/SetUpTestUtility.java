@@ -20,7 +20,7 @@ public class SetUpTestUtility {
 
     public static GuiTest getGuiTestInstance(Class<? extends Application> appClass) {
         
-        String[] args= {"-c", "src\\main\\resources\\config\\tshaconfig.properties"};
+        String[] args= {"-c", "src\\main\\resources\\config\\appconfig\\tshaconfig.properties"};
         FXTestUtils.launchApp(appClass,args);
 
         return new GuiTest() {
